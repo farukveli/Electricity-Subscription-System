@@ -37,5 +37,6 @@ public class AnaMenu extends JFrame {
 		});
 		btnNewButton.setBounds(10, 11, 150, 50);
 		contentPane.add(btnNewButton);
+		System.out.println("asdasdasd");
 	}
 }
