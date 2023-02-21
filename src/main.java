@@ -22,7 +22,6 @@ public class main {
         
         AnaMenu anamenu = new AnaMenu(con.getConnection());
         anamenu.setVisible(true);
-		System.out.println("asdasdasd");
 		
 	}
 
