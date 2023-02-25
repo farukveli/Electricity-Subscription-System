@@ -22,7 +22,8 @@ public class Karneler {
 		this.sayfiye_dur = sayfiye_dur;
 	}
 	
-	public void Karne_Ekle_Duzenle(Connection conn, int karne_no, String adres, int okuma_gunu, int koy_dur, int sayfiye_dur, int secenek) {
+	public int Karne_Ekle_Duzenle(Connection conn, int karne_no, String adres, int okuma_gunu, int koy_dur, int sayfiye_dur, int secenek) {
+		int durum;
 		try {
 			String query;
 			if(secenek==0) {
@@ -38,13 +39,36 @@ public class Karneler {
 			statement.setInt(5, okuma_gunu);
 			statement.execute();
 			System.out.println("yazdi");
+			durum=0;
 		}
 		catch(PSQLException e) {
 			System.out.println("Ayný id'li karne olamaz");
+			durum=-1;
 		}
 		catch (SQLException e) {
+			durum=-2;
 			e.printStackTrace();
 		} 
+		return durum;
+	}
+	
+	public void karne_sil(Connection conn, int karne_no) {
+		String query=("DELETE FROM karneler WHERE karne_no=?");
+		PreparedStatement statement;
+		try {
+			statement = conn.prepareStatement(query);
+			statement.setInt(1, karne_no);
+			statement.execute();
+			System.out.println("Karne Silindi");
+		} 
+		catch(PSQLException e) {
+			System.out.println("Karne Bulunamadý!!!");
+		}
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 	
 	public Karneler Karne_Arama(Connection conn,int karne_no) {
@@ -60,22 +84,10 @@ public class Karneler {
 			k.sayfiye_dur=r.getInt(4);
 			k.okuma_gunu=r.getInt(5);
 		} catch (SQLException e) {
-			System.out.println("Bu karne_no bulunamadý");
+			k=null;
 		}
 		
 		return k;
-	}
-	
-	public void Karne_Duzenle(Connection conn, int id, int karne_no, String adres, int okuma_gunu, int koy_dur, int sayfiye_dur) {
-		try {
-			PreparedStatement statement = conn.prepareStatement("UPDATE karneler SET karne_no=?,adres=?,okuma_gunu=?,"+
-					"koy_dur=?,sayfiye_dur=? where id=?");
-			
-			
-		}
-		catch(SQLException e){
-			e.printStackTrace();
-		}
 	}
 	
 	public int getId() {

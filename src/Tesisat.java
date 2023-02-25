@@ -8,52 +8,81 @@ public class Tesisat {
 	private int tesisat_no;
 	private int karne_id;
 	private int sira_no;
-	private String adres;
+	private String ilce;
+	private String mahalle;
 	private int il_kodu;
 	private int tarife_kodu;
 	private int kurulu_guc;
 	private int og_dur;
+	private int abone_no;
 	
 	public Tesisat() {
 		super();
 	}
 	
-	public Tesisat(int tesisat_id, int tesisat_no, int karne_id, int sira_no, String adres, int il_kodu,
-			int tarife_kodu, int kurulu_guc, int og_dur) {
+	
+	
+	public Tesisat(int tesisat_id, int tesisat_no, int karne_id, int sira_no, String ilce, String mahalle, int il_kodu,
+			int tarife_kodu, int kurulu_guc, int og_dur, int abone_no) {
 		this.tesisat_id = tesisat_id;
 		this.tesisat_no = tesisat_no;
 		this.karne_id = karne_id;
 		this.sira_no = sira_no;
-		this.adres = adres;
+		this.ilce = ilce;
+		this.mahalle = mahalle;
 		this.il_kodu = il_kodu;
 		this.tarife_kodu = tarife_kodu;
 		this.kurulu_guc = kurulu_guc;
 		this.og_dur = og_dur;
+		this.abone_no = abone_no;
+	}
+
+
+
+	public int Tesisat_Ekle_Duzenle(Connection conn,int tesisat_no,int karne_no,int sira_no,int il_kodu,String ilce,
+			String mahalle, int tarife_kodu,int kurulu_guc,int og_dur,int abone_no,int secenek) {
+		int durum=0;
+		int karne_id;
+		Karneler sonuc=new Karneler().Karne_Arama(conn, karne_no);
+		if(sonuc==null) {
+			durum= -2;
+		}else {
+			karne_id=new Karneler().Karne_Arama(conn, karne_no).getId();
+			
+			try {
+				String query= new String();
+				if(secenek==0) {
+					query="INSERT INTO tesisat VALUES (nextval('tesisat_id'),?,?,?,?,?,?,?,?,?,?)";
+				}else {
+					query="UPDATE tesisat SET tesisat_no=?,karne_id=?,sira_no=?,il_kodu=?,ilce=?,mahalle=?,tarife_kodu=?"
+							+ ",kurulu_guc=?,og_dur=?,abone_no=? where tesisat_no="+tesisat_no;
+				}
+				PreparedStatement statement = conn.prepareStatement(query);
+				statement.setInt(1, tesisat_no);
+				statement.setInt(2, karne_id);
+				statement.setInt(3, sira_no);
+				statement.setInt(4, il_kodu);
+				statement.setString(5, ilce);
+				statement.setString(6, mahalle);
+				statement.setInt(7, tarife_kodu);
+				statement.setInt(8, kurulu_guc);
+				statement.setInt(9, og_dur);
+				statement.setInt(10, abone_no);
+				statement.execute();
+				System.out.println("Tesisat Yazildi");
+				durum=0;
+			}catch(PSQLException e) {
+				System.out.println("Ayný id'li tesisat olamaz");
+				durum = -1;
+			} 
+			catch (SQLException e) {
+				durum = -2;
+			}	
+		}
+		return durum;
 	}
 	
-	public void Tesisat_Ekle(Connection conn,int tesisat_id,int tesisat_no,int karne_id,int sira_no,String adres,
-			int il_kodu,int tarife_kodu,int kurulu_guc,int og_dur) {
-		
-		try {
-			PreparedStatement statement = conn.prepareStatement("INSERT INTO tesisat VALUES (?,?,?,?,?,?,?,?,?)");
-			statement.setInt(1, tesisat_id);
-			statement.setInt(2, tesisat_no);
-			statement.setInt(3, karne_id);
-			statement.setInt(4, sira_no);
-			statement.setString(5, adres);
-			statement.setInt(6, il_kodu);
-			statement.setInt(7, tarife_kodu);
-			statement.setInt(8, kurulu_guc);
-			statement.setInt(9, og_dur);
-			statement.execute();
-		}catch(PSQLException e) {
-			System.out.println("Ayný id'li tesisat olamaz");
-		} 
-		catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-	}
+	
 	
 	public int getTesisat_id() {
 		return tesisat_id;
@@ -87,12 +116,28 @@ public class Tesisat {
 		this.sira_no = sira_no;
 	}
 
-	public String getAdres() {
-		return adres;
+	public String getIlce() {
+		return ilce;
 	}
 
-	public void setAdres(String adres) {
-		this.adres = adres;
+	public void setIlce(String ilce) {
+		this.ilce = ilce;
+	}
+
+	public String getMahalle() {
+		return mahalle;
+	}
+
+	public void setMahalle(String mahalle) {
+		this.mahalle = mahalle;
+	}
+
+	public int getAbone_no() {
+		return abone_no;
+	}
+
+	public void setAbone_no(int abone_no) {
+		this.abone_no = abone_no;
 	}
 
 	public int getIl_kodu() {

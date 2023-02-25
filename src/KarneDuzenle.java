@@ -13,8 +13,11 @@ import com.toedter.calendar.JCalendar;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.sql.Connection;
 import java.awt.event.ActionEvent;
+import javax.swing.SwingConstants;
 
 public class KarneDuzenle extends JFrame {
 
@@ -66,28 +69,74 @@ public class KarneDuzenle extends JFrame {
 		
 		
 		JLabel lblNewLabel = new JLabel("Karne No");
+		JLabel lblAdres = new JLabel("Adres");
+		JLabel lblKyDurumu = new JLabel("K\u00F6y Durumu");
+		JLabel lblSayfiyeDurumu = new JLabel("Sayfiye Durumu");		
+		JLabel lblOkumaGn = new JLabel("Okuma G\u00FCn\u00FC");		
+		JLabel karne_bulunamadi = new JLabel("");		
+		
+		
+		karne_no.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				karne_bulunamadi.setVisible(false);
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});
+		
 		lblNewLabel.setBounds(10, 34, 75, 25);
 		contentPane.add(lblNewLabel);
 		
-		JLabel lblAdres = new JLabel("Adres");
 		lblAdres.setBounds(10, 87, 75, 25);
 		lblAdres.setVisible(false);
 		contentPane.add(lblAdres);
 		
-		JLabel lblKyDurumu = new JLabel("K\u00F6y Durumu");
 		lblKyDurumu.setBounds(10, 137, 75, 25);
 		lblKyDurumu.setVisible(false);
 		contentPane.add(lblKyDurumu);
 		
-		JLabel lblSayfiyeDurumu = new JLabel("Sayfiye Durumu");
+
 		lblSayfiyeDurumu.setBounds(10, 183, 93, 25);
 		lblSayfiyeDurumu.setVisible(false);
 		contentPane.add(lblSayfiyeDurumu);
 		
-		JLabel lblOkumaGn = new JLabel("Okuma G\u00FCn\u00FC");
+
 		lblOkumaGn.setBounds(10, 235, 75, 25);
 		lblOkumaGn.setVisible(false);
 		contentPane.add(lblOkumaGn);
+		
+
+		karne_bulunamadi.setHorizontalAlignment(SwingConstants.LEFT);
+		karne_bulunamadi.setBounds(140, 63, 234, 25);
+		karne_bulunamadi.setForeground(Color.red);
+		karne_bulunamadi.setVisible(false);
+		contentPane.add(karne_bulunamadi);
 		
 		
 		JComboBox okuma_gunu = new JComboBox();
@@ -123,20 +172,27 @@ public class KarneDuzenle extends JFrame {
 		arama.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Karneler sonuc=new Karneler().Karne_Arama(conn, Integer.parseInt(karne_no.getText()));
-				karne_no.setText(""+sonuc.getKarne_no());
-				adres.setText(sonuc.getAdres());
-				koy.setSelectedIndex(sonuc.getKoy_dur()+1);
-				sayfiye.setSelectedIndex(sonuc.getSayfiye_dur()+1);
-				okuma_gunu.setSelectedIndex(sonuc.getOkuma_gunu());
-				adres.setVisible(true);
-				koy.setVisible(true);
-				sayfiye.setVisible(true);
-				okuma_gunu.setVisible(true);
-				lblAdres.setVisible(true);
-				lblKyDurumu.setVisible(true);
-				lblSayfiyeDurumu.setVisible(true);
-				lblOkumaGn.setVisible(true);
-				kaydet.setVisible(true);
+				if(sonuc != null) {
+					karne_no.setText(""+sonuc.getKarne_no());
+					adres.setText(sonuc.getAdres());
+					koy.setSelectedIndex(sonuc.getKoy_dur()+1);
+					sayfiye.setSelectedIndex(sonuc.getSayfiye_dur()+1);
+					okuma_gunu.setSelectedIndex(sonuc.getOkuma_gunu());
+					adres.setVisible(true);
+					koy.setVisible(true);
+					sayfiye.setVisible(true);
+					okuma_gunu.setVisible(true);
+					lblAdres.setVisible(true);
+					lblKyDurumu.setVisible(true);
+					lblSayfiyeDurumu.setVisible(true);
+					lblOkumaGn.setVisible(true);
+					kaydet.setVisible(true);	
+				}else {
+					karne_bulunamadi.setText(karne_no.getText()+" NO'lu Karne Bulunamadý!!!");
+					karne_no.setText("");
+					karne_bulunamadi.setVisible(true);
+				}
+				
 			}
 		});
 		
@@ -153,5 +209,7 @@ public class KarneDuzenle extends JFrame {
 		});
 		geri_don.setBounds(285, 406, 89, 23);
 		contentPane.add(geri_don);
+		
+		
 	}
 }

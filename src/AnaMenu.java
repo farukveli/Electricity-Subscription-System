@@ -18,6 +18,7 @@ public class AnaMenu extends JFrame {
 	private JPanel contentPane;
 	private Connection conn;
 	private JTextField baslik;
+	private JButton tesisatIslemleri;
 
 	/**
 	 * Create the frame.
@@ -31,17 +32,17 @@ public class AnaMenu extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JButton btnNewButton = new JButton("Karne \u0130\u015Flemleri");
-		btnNewButton.setFont(new Font("Ubuntu", Font.PLAIN, 11));
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton karneIslemleri = new JButton("Karne \u0130\u015Flemleri");
+		karneIslemleri.setFont(new Font("Ubuntu", Font.PLAIN, 11));
+		karneIslemleri.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				KarneIslem karne = new KarneIslem(conn);
 				setVisible(false);
 				karne.setVisible(true);
 			}
 		});
-		btnNewButton.setBounds(110, 123, 150, 50);
-		contentPane.add(btnNewButton);
+		karneIslemleri.setBounds(110, 123, 150, 50);
+		contentPane.add(karneIslemleri);
 		
 		baslik = new JTextField();
 		baslik.setEditable(false);
@@ -51,5 +52,17 @@ public class AnaMenu extends JFrame {
 		baslik.setBounds(10, 11, 364, 66);
 		contentPane.add(baslik);
 		baslik.setColumns(10);
+		
+		tesisatIslemleri = new JButton("Tesisat \u0130\u015Flemleri");
+		tesisatIslemleri.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TesisatIslem ekran = new TesisatIslem(conn);
+				ekran.setVisible(true);
+				setVisible(false);
+			}
+		});
+		tesisatIslemleri.setFont(new Font("Ubuntu", Font.PLAIN, 11));
+		tesisatIslemleri.setBounds(110, 184, 150, 50);
+		contentPane.add(tesisatIslemleri);
 	}
 }
