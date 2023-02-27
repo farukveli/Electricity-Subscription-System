@@ -26,6 +26,7 @@ import java.awt.event.MouseAdapter;
 public class TesisatKayit extends JFrame {
 
 	private JPanel contentPane;
+	private JPanel panel;
 	private JTextField tesisat_no;
 	private JTextField karne_no;
 	private JTextField sira_no;
@@ -36,7 +37,7 @@ public class TesisatKayit extends JFrame {
 	private JTextField abone_no;
 
 	
-	public TesisatKayit(Connection conn) {
+	public TesisatKayit(Connection conn,JPanel islem_ekran) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 400, 570);
 		contentPane = new JPanel();
@@ -44,7 +45,7 @@ public class TesisatKayit extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JPanel panel = new JPanel();
+		panel = new JPanel();
 		panel.setBounds(0, 0, 384, 531);
 		contentPane.add(panel);
 		panel.setLayout(null);
@@ -139,6 +140,8 @@ public class TesisatKayit extends JFrame {
 		panel.add(sira_no);
 	
 		JComboBox il = new JComboBox();
+		JComboBox ilce = new JComboBox();
+		JComboBox mahalle = new JComboBox();
 		il.setBounds(157, 144, 160, 35);
 		String il_sorgu="Select isim from iller";
 		il.addItem("Seçiniz...");
@@ -157,34 +160,47 @@ public class TesisatKayit extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				uyari.setVisible(false);
+				ilce.removeAllItems();
+				ilce.addItem("Seçiniz...");
+				ilce.setSelectedIndex(0);
+				ilce.setEnabled(true);
+				mahalle.setEnabled(false);
+				mahalle.removeAllItems();
+				mahalle.addItem("Seçiniz...");
+				mahalle.setSelectedIndex(0);
+				
 			}
 		});
 		
 		panel.add(il);
 		
 		
-		JComboBox ilce = new JComboBox();
+		ilce.setEnabled(false);
 		ilce.addItem("Seçiniz...");
 		ilce.addMouseListener(new MouseAdapter() {
-
+			
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				String query_1="select isim from iller where id="+Integer.toString(il.getSelectedIndex());
-				String il_adi ;
+				String il_adi=il.getSelectedItem().toString();
 				uyari.setVisible(false);
+				ilce.removeAllItems();
+				ilce.addItem("Seçiniz...");
+				ilce.setSelectedIndex(0);
+				mahalle.removeAllItems();
+				mahalle.addItem("Seçiniz...");
+				mahalle.setSelectedIndex(0);
 				try {
 					Statement s = conn.createStatement();
-					ResultSet r = s.executeQuery(query_1);
-					r.next();
-					il_adi=r.getString(1);
+					ResultSet r ;
 					Locale trlocale = new Locale("tr","TR");
 					il_adi=il_adi.toLowerCase(trlocale);
-					String query_2="select ilce from "+ il_adi;
-					r=s.executeQuery(query_2);
+					String query="select ilce from "+ il_adi + " order by ilce";
+					r=s.executeQuery(query);
 					while(r.next()) {
 						ilce.addItem(r.getString(1));
 					}
 					ilce.setMaximumRowCount(10);
+					mahalle.setEnabled(true);
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -196,14 +212,34 @@ public class TesisatKayit extends JFrame {
 		ilce.setBounds(157, 190, 160, 35);
 		panel.add(ilce);
 
-		JComboBox mahalle = new JComboBox();
+		
 		mahalle.setModel(new DefaultComboBoxModel(new String[] {"Se\u00E7iniz..."}));
 		mahalle.setSelectedIndex(0);
 		mahalle.setBounds(157, 236, 160, 35);
+		mahalle.setEnabled(false);
 		mahalle.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				String ilce_adi= ilce.getSelectedItem().toString();
+				Locale trlocale = new Locale("tr","TR");
+				ilce_adi=ilce_adi.toLowerCase(trlocale);
+				String query="select mahalle from "+ ilce_adi + " order by mahalle";
 				uyari.setVisible(false);
+				mahalle.removeAllItems();
+				mahalle.addItem("Seçiniz...");
+				mahalle.setSelectedIndex(0);
+				Statement s;
+				try {
+					s = conn.createStatement();
+					ResultSet r = s.executeQuery(query);
+					while(r.next()) {
+						mahalle.addItem(r.getString(1));
+					}
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				mahalle.setMaximumRowCount(15);
 			}
 		});
 		panel.add(mahalle);
@@ -291,6 +327,8 @@ public class TesisatKayit extends JFrame {
 						ilce.setSelectedIndex(0);
 						mahalle.setSelectedIndex(0);
 						tarife.setSelectedIndex(0);
+						ilce.setEnabled(false);
+						mahalle.setEnabled(false);
 						kurulu_guc.setText("");
 						og_dur.setText("");
 						abone_no.setText("");
@@ -308,6 +346,8 @@ public class TesisatKayit extends JFrame {
 		JButton geri_don = new JButton("Geri D\u00F6n");
 		geri_don.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				islem_ekran.setVisible(true);
+				panel.setVisible(false);
 			}
 		});
 		geri_don.setBounds(285, 497, 89, 23);
@@ -315,5 +355,105 @@ public class TesisatKayit extends JFrame {
 		
 		
 		
+	}
+
+
+	public JPanel getContentPane() {
+		return contentPane;
+	}
+
+
+	public void setContentPane(JPanel contentPane) {
+		this.contentPane = contentPane;
+	}
+
+
+	public JPanel getPanel() {
+		return panel;
+	}
+
+
+	public void setPanel(JPanel panel) {
+		this.panel = panel;
+	}
+
+
+	public JTextField getTesisat_no() {
+		return tesisat_no;
+	}
+
+
+	public void setTesisat_no(JTextField tesisat_no) {
+		this.tesisat_no = tesisat_no;
+	}
+
+
+	public JTextField getKarne_no() {
+		return karne_no;
+	}
+
+
+	public void setKarne_no(JTextField karne_no) {
+		this.karne_no = karne_no;
+	}
+
+
+	public JTextField getSira_no() {
+		return sira_no;
+	}
+
+
+	public void setSira_no(JTextField sira_no) {
+		this.sira_no = sira_no;
+	}
+
+
+	public JLabel getLbl_KarneNo() {
+		return lbl_KarneNo;
+	}
+
+
+	public void setLbl_KarneNo(JLabel lbl_KarneNo) {
+		this.lbl_KarneNo = lbl_KarneNo;
+	}
+
+
+	public JLabel getLbl_SiraNo() {
+		return lbl_SiraNo;
+	}
+
+
+	public void setLbl_SiraNo(JLabel lbl_SiraNo) {
+		this.lbl_SiraNo = lbl_SiraNo;
+	}
+
+
+	public JTextField getKurulu_guc() {
+		return kurulu_guc;
+	}
+
+
+	public void setKurulu_guc(JTextField kurulu_guc) {
+		this.kurulu_guc = kurulu_guc;
+	}
+
+
+	public JTextField getOg_dur() {
+		return og_dur;
+	}
+
+
+	public void setOg_dur(JTextField og_dur) {
+		this.og_dur = og_dur;
+	}
+
+
+	public JTextField getAbone_no() {
+		return abone_no;
+	}
+
+
+	public void setAbone_no(JTextField abone_no) {
+		this.abone_no = abone_no;
 	}
 }

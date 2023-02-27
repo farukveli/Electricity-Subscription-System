@@ -12,26 +12,29 @@ import java.awt.event.ActionEvent;
 public class TesisatIslem extends JFrame {
 
 	private JPanel contentPane;
-	
+	private TesisatKayit ekran;
 	public TesisatIslem(Connection conn) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 400, 500);
+		setBounds(100, 100, 400, 570);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(0, 0, 384, 461);
+		panel.setBounds(0, 0, 384, 531);
 		contentPane.add(panel);
 		panel.setLayout(null);
+		ekran = new TesisatKayit(conn,panel);
+		contentPane.add(ekran.getPanel());
+		ekran.getPanel().setLayout(null);
+		ekran.getPanel().setVisible(false);
 		
 		JButton tesisatKayýt = new JButton("Yeni Tesisat Kay\u0131t");
 		tesisatKayýt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				TesisatKayit ekran = new TesisatKayit(conn);
-				ekran.setVisible(true);
-				setVisible(false);
+				ekran.getPanel().setVisible(true);
+				panel.setVisible(false);
 			}
 		});
 		tesisatKayýt.setBounds(122, 30, 140, 46);

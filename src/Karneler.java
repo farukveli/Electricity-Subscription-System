@@ -73,12 +73,13 @@ public class Karneler {
 	
 	public Karneler Karne_Arama(Connection conn,int karne_no) {
 		Karneler k= new Karneler();
-		String query="SELECT karne_no,adres,koy_dur,sayfiye_dur,okuma_gunu FROM karneler WHERE karne_no="+karne_no;
+		k.karne_no=karne_no;
+		String query="SELECT id,adres,koy_dur,sayfiye_dur,okuma_gunu FROM karneler WHERE karne_no="+karne_no;
 		try {
 			Statement s= conn.createStatement();
 			ResultSet r= s.executeQuery(query);
 			r.next();
-			k.karne_no=r.getInt(1);
+			k.id=r.getInt(1);
 			k.adres=r.getString(2);
 			k.koy_dur=r.getInt(3);
 			k.sayfiye_dur=r.getInt(4);

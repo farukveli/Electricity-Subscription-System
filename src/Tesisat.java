@@ -42,12 +42,12 @@ public class Tesisat {
 	public int Tesisat_Ekle_Duzenle(Connection conn,int tesisat_no,int karne_no,int sira_no,int il_kodu,String ilce,
 			String mahalle, int tarife_kodu,int kurulu_guc,int og_dur,int abone_no,int secenek) {
 		int durum=0;
-		int karne_id;
+		Karneler karne_id;
 		Karneler sonuc=new Karneler().Karne_Arama(conn, karne_no);
 		if(sonuc==null) {
 			durum= -2;
 		}else {
-			karne_id=new Karneler().Karne_Arama(conn, karne_no).getId();
+			karne_id=new Karneler();
 			
 			try {
 				String query= new String();
@@ -59,7 +59,7 @@ public class Tesisat {
 				}
 				PreparedStatement statement = conn.prepareStatement(query);
 				statement.setInt(1, tesisat_no);
-				statement.setInt(2, karne_id);
+				statement.setInt(2, karne_id.Karne_Arama(conn, karne_no).getId());
 				statement.setInt(3, sira_no);
 				statement.setInt(4, il_kodu);
 				statement.setString(5, ilce);
