@@ -55,18 +55,18 @@ public class AnaMenu extends JFrame {
 		
 		karne_kayit = karne_islemleri.getKarne_kayit();
 		contentPane.add(karne_kayit.getPanel());
-		karne_kayit.setLayout(null);
+		karne_kayit.getContentPane().setLayout(null);
 		karne_kayit.setVisible(false);
 		
 		karne_duzenle = karne_islemleri.getKarne_duzenle();
 		contentPane.add(karne_duzenle.getPanel());
 		karne_duzenle.setVisible(false);
-		karne_duzenle.setLayout(null);
+		karne_duzenle.getContentPane().setLayout(null);
 		
 		karne_sil = karne_islemleri.getKarne_sil();
 		contentPane.add(karne_sil.getPanel());
 		karne_sil.setVisible(false);
-		karne_sil.setLayout(null);
+		karne_sil.getContentPane().setLayout(null);
 		
 			
 		tesisat_islemleri = new TesisatIslem(conn,panel);
@@ -77,17 +77,17 @@ public class AnaMenu extends JFrame {
 		tesisat_kayit = tesisat_islemleri.getTesisat_kayit();
 		contentPane.add(tesisat_kayit.getPanel());
 		tesisat_kayit.setVisible(false);
-		tesisat_kayit.setLayout(null);
+		tesisat_kayit.getContentPane().setLayout(null);
 		
 		tesisat_duzenle = tesisat_islemleri.getTesisat_duzenle();
 		contentPane.add(tesisat_duzenle.getPanel());
 		tesisat_duzenle.setVisible(false);
-		tesisat_duzenle.setLayout(null);
+		tesisat_duzenle.getContentPane().setLayout(null);
 		
 		tesisat_sil = tesisat_islemleri.getTesisat_sil();
 		contentPane.add(tesisat_sil.getPanel());
 		tesisat_sil.setVisible(false);
-		tesisat_sil.setLayout(null);
+		tesisat_sil.getContentPane().setLayout(null);
 		
 		baslik = new JTextField();
 		baslik.setEditable(false);
@@ -120,5 +120,14 @@ public class AnaMenu extends JFrame {
 		tesisatIslemleri.setFont(new Font("Ubuntu", Font.PLAIN, 11));
 		tesisatIslemleri.setBounds(110, 184, 150, 50);
 		panel.add(tesisatIslemleri);
+		
+		JButton aboneIslemleri = new JButton("Abone \u0130\u015Flemleri");
+		aboneIslemleri.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		aboneIslemleri.setFont(new Font("Ubuntu", Font.PLAIN, 11));
+		aboneIslemleri.setBounds(110, 245, 150, 50);
+		panel.add(aboneIslemleri);
 	}
 }
