@@ -82,7 +82,34 @@ public class Tesisat {
 		return durum;
 	}
 	
-	
+	public Tesisat Tesisat_Arama(Connection conn,int tesisat_no) {
+		Tesisat k= new Tesisat();
+		k.tesisat_no=tesisat_no;
+		String query="SELECT tesisat_id,karne_id,sira_no,il_kodu,ilce,mahalle,tarife_kodu,"
+				+ "kurulu_guc,og_dur,abone_no FROM tesisat WHERE tesisat_no="+tesisat_no;
+		int durum=0;
+		try {
+			Statement s= conn.createStatement();
+			ResultSet r= s.executeQuery(query);
+			r.next();
+			k.tesisat_id=r.getInt(1);
+			k.sira_no=r.getInt(3);
+			k.il_kodu=r.getInt(4);
+			k.ilce=r.getString(5);
+			k.mahalle=r.getString(6);
+			k.tarife_kodu=r.getInt(7);
+			k.kurulu_guc=r.getInt(8);
+			k.og_dur=r.getInt(9);
+			k.abone_no=r.getInt(10);
+			ResultSet id = s.executeQuery("select karne_no from karneler where id="+ r.getInt(2));
+			id.next();
+			k.karne_id=id.getInt(1);
+		} catch (SQLException e) {
+			k=null;
+		}
+		
+		return k;
+	}
 	
 	public int getTesisat_id() {
 		return tesisat_id;

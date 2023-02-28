@@ -24,6 +24,7 @@ import java.awt.Font;
 public class KarneKayit extends JFrame {
 
 	private JPanel contentPane;
+	private JPanel panel;
 	private JTextField karne_no;
 	private JTextField adres;
 	private JComboBox sayfiye;
@@ -31,40 +32,45 @@ public class KarneKayit extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public KarneKayit(Connection conn) {
+	public KarneKayit(Connection conn, JPanel karne_islem) {
 		this.conn=conn;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 400, 500);
+		setBounds(100, 100, 400, 570);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		panel=new JPanel();
+		panel.setBounds(0, 0, 384, 531);
+		contentPane.add(panel);
+		panel.setLayout(null);
+		
 		JLabel kayit_uyari = new JLabel("");
 		kayit_uyari.setFont(new Font("Ubuntu", Font.PLAIN, 16));
 		kayit_uyari.setHorizontalAlignment(SwingConstants.CENTER);
 		kayit_uyari.setBounds(10, 287, 364, 43);
-		contentPane.add(kayit_uyari);
+		panel.add(kayit_uyari);
 		
 		JLabel lblNewLabel = new JLabel("Karne No");
 		lblNewLabel.setBounds(10, 34, 75, 25);
-		contentPane.add(lblNewLabel);
+		panel.add(lblNewLabel);
 		
 		JLabel lblAdres = new JLabel("Adres");
 		lblAdres.setBounds(10, 87, 75, 25);
-		contentPane.add(lblAdres);
+		panel.add(lblAdres);
 		
 		JLabel lblKyDurumu = new JLabel("K\u00F6y Durumu");
 		lblKyDurumu.setBounds(10, 137, 75, 25);
-		contentPane.add(lblKyDurumu);
+		panel.add(lblKyDurumu);
 		
 		JLabel lblSayfiyeDurumu = new JLabel("Sayfiye Durumu");
 		lblSayfiyeDurumu.setBounds(10, 183, 93, 25);
-		contentPane.add(lblSayfiyeDurumu);
+		panel.add(lblSayfiyeDurumu);
 		
 		JLabel lblOkumaGn = new JLabel("Okuma G\u00FCn\u00FC");
 		lblOkumaGn.setBounds(10, 235, 75, 25);
-		contentPane.add(lblOkumaGn);
+		panel.add(lblOkumaGn);
 		
 		
 		karne_no = new JTextField();
@@ -76,7 +82,7 @@ public class KarneKayit extends JFrame {
 				kayit_uyari.setVisible(false);
 			}
 		});
-		contentPane.add(karne_no);
+		panel.add(karne_no);
 		
 		adres = new JTextField();
 		adres.setColumns(10);
@@ -87,7 +93,7 @@ public class KarneKayit extends JFrame {
 				kayit_uyari.setVisible(false);
 			}
 		});
-		contentPane.add(adres);
+		panel.add(adres);
 		
 		JComboBox koy = new JComboBox();
 		koy.setBackground(Color.WHITE);
@@ -100,7 +106,7 @@ public class KarneKayit extends JFrame {
 				kayit_uyari.setVisible(false);
 			}
 		});
-		contentPane.add(koy);
+		panel.add(koy);
 		
 		
 		sayfiye = new JComboBox();
@@ -114,7 +120,7 @@ public class KarneKayit extends JFrame {
 				kayit_uyari.setVisible(false);
 			}
 		});
-		contentPane.add(sayfiye);
+		panel.add(sayfiye);
 		
 
 		
@@ -129,7 +135,7 @@ public class KarneKayit extends JFrame {
 				kayit_uyari.setVisible(false);
 			}
 		});
-		contentPane.add(okuma_gunu);
+		panel.add(okuma_gunu);
 
 		JButton kaydet = new JButton("Kaydet");
 		kaydet.addActionListener(new ActionListener() {
@@ -156,19 +162,18 @@ public class KarneKayit extends JFrame {
 				sayfiye.setSelectedIndex(0);
 			}
 		});
-		kaydet.setBounds(186, 415, 89, 23);
-		contentPane.add(kaydet);
+		kaydet.setBounds(186, 497, 89, 23);
+		panel.add(kaydet);
 		
 		JButton geri_don = new JButton("Geri D\u00F6n");
 		geri_don.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				KarneIslem karne = new KarneIslem(conn);
-				setVisible(false);
-				karne.setVisible(true);
+				karne_islem.setVisible(true);
+				panel.setVisible(false);
 			}
 		});
-		geri_don.setBounds(285, 415, 89, 23);
-		contentPane.add(geri_don);
+		geri_don.setBounds(285, 497, 89, 23);
+		panel.add(geri_don);
 		addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -176,5 +181,41 @@ public class KarneKayit extends JFrame {
 			}
 		});
 		
+	}
+	public JPanel getPanel() {
+		return panel;
+	}
+	public void setPanel(JPanel panel) {
+		this.panel = panel;
+	}
+	public JPanel getContentPane() {
+		return contentPane;
+	}
+	public void setContentPane(JPanel contentPane) {
+		this.contentPane = contentPane;
+	}
+	public JTextField getKarne_no() {
+		return karne_no;
+	}
+	public void setKarne_no(JTextField karne_no) {
+		this.karne_no = karne_no;
+	}
+	public JTextField getAdres() {
+		return adres;
+	}
+	public void setAdres(JTextField adres) {
+		this.adres = adres;
+	}
+	public JComboBox getSayfiye() {
+		return sayfiye;
+	}
+	public void setSayfiye(JComboBox sayfiye) {
+		this.sayfiye = sayfiye;
+	}
+	public Connection getConn() {
+		return conn;
+	}
+	public void setConn(Connection conn) {
+		this.conn = conn;
 	}
 }

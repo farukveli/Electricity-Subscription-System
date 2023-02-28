@@ -13,6 +13,7 @@ import com.toedter.calendar.JCalendar;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.sql.Connection;
@@ -22,40 +23,56 @@ import javax.swing.SwingConstants;
 public class KarneDuzenle extends JFrame {
 
 	private JPanel contentPane;
+	private JPanel panel;
+	private Connection conn;
 	private JTextField karne_no;
 	private JTextField adres;
 	private JComboBox sayfiye;
-	private Connection conn;
+	private JComboBox koy;
+	private JComboBox okuma_gunu;
+	private JLabel lblNewLabel;
+	private JLabel lblAdres;
+	private JLabel lblKyDurumu;
+	private JLabel lblSayfiyeDurumu;		
+	private JLabel lblOkumaGn;		
+	private JLabel karne_bulunamadi;		
+	
+	
 	/**
 	 * Create the frame.
 	 */
-	public KarneDuzenle(Connection conn) {
+	public KarneDuzenle(Connection conn,JPanel karne_islem) {
 		this.conn=conn;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 400, 500);
+		setBounds(100, 100, 400, 570);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		panel = new JPanel();
+		panel.setBounds(0, 0, 384, 531);
+		contentPane.add(panel);
+		panel.setLayout(null);
+		
 		karne_no = new JTextField();
 		karne_no.setBounds(140, 29, 160, 35);
-		contentPane.add(karne_no);
+		panel.add(karne_no);
 		karne_no.setColumns(10);
 		
 		adres = new JTextField();
 		adres.setColumns(10);
 		adres.setBounds(140, 81, 160, 35);
 		adres.setVisible(false);
-		contentPane.add(adres);
+		panel.add(adres);
 		
-		JComboBox koy = new JComboBox();
+		koy = new JComboBox();
 		koy.setBackground(Color.WHITE);
 		koy.setModel(new DefaultComboBoxModel(new String[] {"Se\u00E7iniz...", "K\u00F6y De\u011Fil", "K\u00F6y"}));
 		koy.setSelectedIndex(0);
 		koy.setBounds(140, 127, 160, 35);
 		koy.setVisible(false);
-		contentPane.add(koy);
+		panel.add(koy);
 		
 		
 		sayfiye = new JComboBox();
@@ -64,88 +81,62 @@ public class KarneDuzenle extends JFrame {
 		sayfiye.setSelectedIndex(0);
 		sayfiye.setBounds(140, 173, 160, 35);
 		sayfiye.setVisible(false);
-		contentPane.add(sayfiye);
+		panel.add(sayfiye);
 		
 		
 		
-		JLabel lblNewLabel = new JLabel("Karne No");
-		JLabel lblAdres = new JLabel("Adres");
-		JLabel lblKyDurumu = new JLabel("K\u00F6y Durumu");
-		JLabel lblSayfiyeDurumu = new JLabel("Sayfiye Durumu");		
-		JLabel lblOkumaGn = new JLabel("Okuma G\u00FCn\u00FC");		
-		JLabel karne_bulunamadi = new JLabel("");		
+		lblNewLabel = new JLabel("Karne No");
+		lblAdres = new JLabel("Adres");
+		lblKyDurumu = new JLabel("K\u00F6y Durumu");
+		lblSayfiyeDurumu = new JLabel("Sayfiye Durumu");		
+		lblOkumaGn = new JLabel("Okuma G\u00FCn\u00FC");		
+		karne_bulunamadi = new JLabel("");		
 		
 		
-		karne_no.addMouseListener(new MouseListener() {
+		karne_no.addMouseListener(new MouseAdapter() {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
 				karne_bulunamadi.setVisible(false);
 			}
-
-			@Override
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
 		});
 		
 		lblNewLabel.setBounds(10, 34, 75, 25);
-		contentPane.add(lblNewLabel);
+		panel.add(lblNewLabel);
 		
 		lblAdres.setBounds(10, 87, 75, 25);
 		lblAdres.setVisible(false);
-		contentPane.add(lblAdres);
+		panel.add(lblAdres);
 		
 		lblKyDurumu.setBounds(10, 137, 75, 25);
 		lblKyDurumu.setVisible(false);
-		contentPane.add(lblKyDurumu);
+		panel.add(lblKyDurumu);
 		
 
 		lblSayfiyeDurumu.setBounds(10, 183, 93, 25);
 		lblSayfiyeDurumu.setVisible(false);
-		contentPane.add(lblSayfiyeDurumu);
+		panel.add(lblSayfiyeDurumu);
 		
 
 		lblOkumaGn.setBounds(10, 235, 75, 25);
 		lblOkumaGn.setVisible(false);
-		contentPane.add(lblOkumaGn);
+		panel.add(lblOkumaGn);
 		
 
 		karne_bulunamadi.setHorizontalAlignment(SwingConstants.LEFT);
 		karne_bulunamadi.setBounds(140, 63, 234, 25);
 		karne_bulunamadi.setForeground(Color.red);
 		karne_bulunamadi.setVisible(false);
-		contentPane.add(karne_bulunamadi);
+		panel.add(karne_bulunamadi);
 		
-		
-		JComboBox okuma_gunu = new JComboBox();
+		okuma_gunu = new JComboBox();
 		okuma_gunu.setModel(new DefaultComboBoxModel(new String[] {"Se\u00E7iniz...", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30"}));
 		okuma_gunu.setSelectedIndex(0);
 		okuma_gunu.setBackground(Color.WHITE);
 		okuma_gunu.setBounds(140, 230, 160, 35);
 		okuma_gunu.setVisible(false);
-		contentPane.add(okuma_gunu);
+		panel.add(okuma_gunu);
 
 		JButton kaydet = new JButton("Kaydet");
 		kaydet.addActionListener(new ActionListener() {
@@ -164,9 +155,9 @@ public class KarneDuzenle extends JFrame {
 				kaydet.setVisible(false);
 			}
 		});
-		kaydet.setBounds(189, 406, 89, 23);
+		kaydet.setBounds(186, 497, 89, 23);
 		kaydet.setVisible(false);
-		contentPane.add(kaydet);
+		panel.add(kaydet);
 		
 		JButton arama = new JButton("Ara");
 		arama.addActionListener(new ActionListener() {
@@ -197,19 +188,54 @@ public class KarneDuzenle extends JFrame {
 		});
 		
 		arama.setBounds(310, 35, 64, 23);
-		contentPane.add(arama);
+		panel.add(arama);
 		
 		JButton geri_don = new JButton("Geri D\u00F6n");
 		geri_don.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				KarneIslem karne = new KarneIslem(conn);
-				setVisible(false);
-				karne.setVisible(true);
+				karne_islem.setVisible(true);
+				panel.setVisible(false);
 			}
 		});
-		geri_don.setBounds(285, 406, 89, 23);
-		contentPane.add(geri_don);
+		geri_don.setBounds(285, 497, 89, 23);
+		panel.add(geri_don);
 		
 		
+	}
+	public JPanel getContentPane() {
+		return contentPane;
+	}
+	public void setContentPane(JPanel contentPane) {
+		this.contentPane = contentPane;
+	}
+	public JPanel getPanel() {
+		return panel;
+	}
+	public void setPanel(JPanel panel) {
+		this.panel = panel;
+	}
+	public JTextField getKarne_no() {
+		return karne_no;
+	}
+	public void setKarne_no(JTextField karne_no) {
+		this.karne_no = karne_no;
+	}
+	public JTextField getAdres() {
+		return adres;
+	}
+	public void setAdres(JTextField adres) {
+		this.adres = adres;
+	}
+	public JComboBox getSayfiye() {
+		return sayfiye;
+	}
+	public void setSayfiye(JComboBox sayfiye) {
+		this.sayfiye = sayfiye;
+	}
+	public Connection getConn() {
+		return conn;
+	}
+	public void setConn(Connection conn) {
+		this.conn = conn;
 	}
 }
