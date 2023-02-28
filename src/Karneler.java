@@ -52,23 +52,31 @@ public class Karneler {
 		return durum;
 	}
 	
-	public void karne_sil(Connection conn, int karne_no) {
-		String query=("DELETE FROM karneler WHERE karne_no=?");
-		PreparedStatement statement;
-		try {
-			statement = conn.prepareStatement(query);
-			statement.setInt(1, karne_no);
-			statement.execute();
-			System.out.println("Karne Silindi");
-		} 
-		catch(PSQLException e) {
-			System.out.println("Karne Bulunamadý!!!");
-		}
-		catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	public int karne_sil(Connection conn, int karne_no) {
+		int durum;
+		Karneler karne = new Karneler().Karne_Arama(conn, karne_no);
+		if(karne != null) {
+			String query=("DELETE FROM karneler WHERE karne_no=?");
+			PreparedStatement statement;
+			try {
+				statement = conn.prepareStatement(query);
+				statement.setInt(1, karne_no);
+				statement.execute();
+				System.out.println("Karne Silindi");
+			} 
+			catch(PSQLException e) {
+				System.out.println("Karne Bulunamadý!!!");
+			}
+			catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			durum=0;
+		}else {
+			durum=-1;
 		}
 		
+		return durum;
 	}
 	
 	public Karneler Karne_Arama(Connection conn,int karne_no) {

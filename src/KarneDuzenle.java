@@ -35,7 +35,7 @@ public class KarneDuzenle extends JFrame {
 	private JLabel lblKyDurumu;
 	private JLabel lblSayfiyeDurumu;		
 	private JLabel lblOkumaGn;		
-	private JLabel karne_bulunamadi;		
+	private JLabel uyari;		
 	
 	
 	/**
@@ -90,7 +90,7 @@ public class KarneDuzenle extends JFrame {
 		lblKyDurumu = new JLabel("K\u00F6y Durumu");
 		lblSayfiyeDurumu = new JLabel("Sayfiye Durumu");		
 		lblOkumaGn = new JLabel("Okuma G\u00FCn\u00FC");		
-		karne_bulunamadi = new JLabel("");		
+		uyari = new JLabel("");		
 		
 		
 		karne_no.addMouseListener(new MouseAdapter() {
@@ -98,7 +98,7 @@ public class KarneDuzenle extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
-				karne_bulunamadi.setVisible(false);
+				uyari.setVisible(false);
 			}
 		});
 		
@@ -124,11 +124,11 @@ public class KarneDuzenle extends JFrame {
 		panel.add(lblOkumaGn);
 		
 
-		karne_bulunamadi.setHorizontalAlignment(SwingConstants.LEFT);
-		karne_bulunamadi.setBounds(140, 63, 234, 25);
-		karne_bulunamadi.setForeground(Color.red);
-		karne_bulunamadi.setVisible(false);
-		panel.add(karne_bulunamadi);
+		uyari.setHorizontalAlignment(SwingConstants.LEFT);
+		uyari.setBounds(140, 63, 234, 25);
+		uyari.setForeground(Color.red);
+		uyari.setVisible(false);
+		panel.add(uyari);
 		
 		okuma_gunu = new JComboBox();
 		okuma_gunu.setModel(new DefaultComboBoxModel(new String[] {"Se\u00E7iniz...", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30"}));
@@ -162,28 +162,33 @@ public class KarneDuzenle extends JFrame {
 		JButton arama = new JButton("Ara");
 		arama.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Karneler sonuc=new Karneler().Karne_Arama(conn, Integer.parseInt(karne_no.getText()));
-				if(sonuc != null) {
-					karne_no.setText(""+sonuc.getKarne_no());
-					adres.setText(sonuc.getAdres());
-					koy.setSelectedIndex(sonuc.getKoy_dur()+1);
-					sayfiye.setSelectedIndex(sonuc.getSayfiye_dur()+1);
-					okuma_gunu.setSelectedIndex(sonuc.getOkuma_gunu());
-					adres.setVisible(true);
-					koy.setVisible(true);
-					sayfiye.setVisible(true);
-					okuma_gunu.setVisible(true);
-					lblAdres.setVisible(true);
-					lblKyDurumu.setVisible(true);
-					lblSayfiyeDurumu.setVisible(true);
-					lblOkumaGn.setVisible(true);
-					kaydet.setVisible(true);	
+				if(karne_no.getText().isEmpty()) {
+					uyari.setText("Lütfen Karne No Giriniz");
+					uyari.setVisible(true);
+					uyari.setForeground(Color.red);
 				}else {
-					karne_bulunamadi.setText(karne_no.getText()+" NO'lu Karne Bulunamadý!!!");
-					karne_no.setText("");
-					karne_bulunamadi.setVisible(true);
+					Karneler sonuc=new Karneler().Karne_Arama(conn, Integer.parseInt(karne_no.getText()));
+					if(sonuc != null) {
+						karne_no.setText(""+sonuc.getKarne_no());
+						adres.setText(sonuc.getAdres());
+						koy.setSelectedIndex(sonuc.getKoy_dur()+1);
+						sayfiye.setSelectedIndex(sonuc.getSayfiye_dur()+1);
+						okuma_gunu.setSelectedIndex(sonuc.getOkuma_gunu());
+						adres.setVisible(true);
+						koy.setVisible(true);
+						sayfiye.setVisible(true);
+						okuma_gunu.setVisible(true);
+						lblAdres.setVisible(true);
+						lblKyDurumu.setVisible(true);
+						lblSayfiyeDurumu.setVisible(true);
+						lblOkumaGn.setVisible(true);
+						kaydet.setVisible(true);	
+					}else {
+						uyari.setText(karne_no.getText()+" NO'lu Karne Bulunamadý!!!");
+						karne_no.setText("");
+						uyari.setVisible(true);
+					}
 				}
-				
 			}
 		});
 		
@@ -193,6 +198,17 @@ public class KarneDuzenle extends JFrame {
 		JButton geri_don = new JButton("Geri D\u00F6n");
 		geri_don.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				karne_no.setText("");
+				adres.setVisible(false);
+				koy.setVisible(false);
+				sayfiye.setVisible(false);
+				okuma_gunu.setVisible(false);
+				lblAdres.setVisible(false);
+				lblKyDurumu.setVisible(false);
+				lblSayfiyeDurumu.setVisible(false);
+				lblOkumaGn.setVisible(false);
+				kaydet.setVisible(false);
+				uyari.setVisible(false);
 				karne_islem.setVisible(true);
 				panel.setVisible(false);
 			}

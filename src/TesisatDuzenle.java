@@ -199,23 +199,7 @@ public class TesisatDuzenle extends JFrame {
 				mahalle.removeAllItems();
 				mahalle.addItem("Seçiniz...");
 				mahalle.setSelectedIndex(0);
-				try {
-					Statement s = conn.createStatement();
-					ResultSet r ;
-					Locale trlocale = new Locale("tr","TR");
-					il_adi=il_adi.toLowerCase(trlocale);
-					String query="select ilce from "+ il_adi + " order by ilce";
-					r=s.executeQuery(query);
-					while(r.next()) {
-						ilce.addItem(r.getString(1));
-					}
-					ilce.setMaximumRowCount(10);
-					mahalle.setEnabled(true);
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				
+				ilceleriListele(il_adi, ilce,  mahalle,conn);
 			}
 
 		});
@@ -228,24 +212,11 @@ public class TesisatDuzenle extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				String ilce_adi= ilce.getSelectedItem().toString();
-				Locale trlocale = new Locale("tr","TR");
-				ilce_adi=ilce_adi.toLowerCase(trlocale);
-				String query="select mahalle from "+ ilce_adi + " order by mahalle";
 				uyari.setVisible(false);
 				mahalle.removeAllItems();
 				mahalle.addItem("Seçiniz...");
 				mahalle.setSelectedIndex(0);
-				Statement s;
-				try {
-					s = conn.createStatement();
-					ResultSet r = s.executeQuery(query);
-					while(r.next()) {
-						mahalle.addItem(r.getString(1));
-					}
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				mahalleleriListele(ilce_adi, mahalle, conn);
 				mahalle.setMaximumRowCount(15);
 			}
 		});
@@ -304,45 +275,52 @@ public class TesisatDuzenle extends JFrame {
 		JButton arama = new JButton("Ara");
 		arama.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Tesisat sonuc=new Tesisat().Tesisat_Arama(conn, Integer.parseInt(tesisat_no.getText()));
-				if(sonuc != null) {
-					tesisat_no.setText(""+sonuc.getTesisat_no());
-					karne_no.setText(""+sonuc.getKarne_id());
-					sira_no.setText("");
-					il.setSelectedIndex(sonuc.getIl_kodu());
-					ilce.addItem(sonuc.getIlce());
-					ilce.setSelectedIndex(0);
-					mahalle.addItem(sonuc.getMahalle());
-					mahalle.setSelectedIndex(0);
-					tarife.setSelectedIndex(sonuc.getTarife_kodu());
-					kurulu_guc.setText(""+sonuc.getKurulu_guc());
-					og_dur.setText(""+sonuc.getOg_dur());
-					abone_no.setText(""+sonuc.getAbone_no());
-					karne_no.setText(""+sonuc.getKarne_id());;
-					sira_no.setText(""+sonuc.getSira_no());;
-					il.setVisible(true);
-					ilce.setVisible(true);
-					mahalle.setVisible(true);
-					tarife.setVisible(true);
-					kurulu_guc.setVisible(true);
-					og_dur.setVisible(true);
-					abone_no.setVisible(true);
-					karne_no.setVisible(true);
-					sira_no.setVisible(true);
-					lbl_KarneNo.setVisible(true);
-					lbl_SiraNo.setVisible(true);
-					lbl_il.setVisible(true);
-					lbl_ilce.setVisible(true);
-					lbl_mahalle.setVisible(true);
-					lbl_tarife.setVisible(true);
-					lbl_kuruluguc.setVisible(true);
-					lbl_ogdur.setVisible(true);
-					lbl_aboneno.setVisible(true);
-					kaydet.setVisible(true);
-					
+				if(tesisat_no.getText().isEmpty()) {
+					uyari.setText("Lütfen Tesisat No Giriniz !!!");
+					uyari.setForeground(Color.red);
+					uyari.setVisible(true);
 				}else {
-					uyari.setText(tesisat_no.getText()+" NO'lu Tesisat Bulunamadi");
-					uyari.setForeground(Color.RED);
+					Tesisat sonuc=new Tesisat().Tesisat_Arama(conn, Integer.parseInt(tesisat_no.getText()));
+					if(sonuc != null) {
+						tesisat_no.setText(""+sonuc.getTesisat_no());
+						karne_no.setText(""+sonuc.getKarne_id());
+						sira_no.setText("");
+						il.setSelectedIndex(sonuc.getIl_kodu());
+						ilceleriListele(il.getSelectedItem().toString(), ilce,  mahalle,conn);
+						ilce.setSelectedItem(sonuc.getIlce());
+						mahalleleriListele(ilce.getSelectedItem().toString(), mahalle , conn);
+						mahalle.setSelectedItem(sonuc.getMahalle());
+						tarife.setSelectedIndex(sonuc.getTarife_kodu());
+						kurulu_guc.setText(""+sonuc.getKurulu_guc());
+						og_dur.setText(""+sonuc.getOg_dur());
+						abone_no.setText(""+sonuc.getAbone_no());
+						karne_no.setText(""+sonuc.getKarne_id());;
+						sira_no.setText(""+sonuc.getSira_no());;
+						il.setVisible(true);
+						ilce.setVisible(true);
+						mahalle.setVisible(true);
+						tarife.setVisible(true);
+						kurulu_guc.setVisible(true);
+						og_dur.setVisible(true);
+						abone_no.setVisible(true);
+						karne_no.setVisible(true);
+						sira_no.setVisible(true);
+						lbl_KarneNo.setVisible(true);
+						lbl_SiraNo.setVisible(true);
+						lbl_il.setVisible(true);
+						lbl_ilce.setVisible(true);
+						lbl_mahalle.setVisible(true);
+						lbl_tarife.setVisible(true);
+						lbl_kuruluguc.setVisible(true);
+						lbl_ogdur.setVisible(true);
+						lbl_aboneno.setVisible(true);
+						kaydet.setVisible(true);
+						
+					}else {
+						uyari.setText(tesisat_no.getText()+" NO'lu Tesisat Bulunamadi");
+						uyari.setForeground(Color.RED);
+						uyari.setVisible(true);
+					}	
 				}
 				
 			}
@@ -419,6 +397,29 @@ public class TesisatDuzenle extends JFrame {
 		JButton geri_don = new JButton("Geri D\u00F6n");
 		geri_don.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				tesisat_no.setText("");
+				karne_no.setVisible(false);
+				sira_no.setVisible(false);
+				il.setVisible(false);
+				ilce.setVisible(false);;
+				mahalle.setVisible(false);
+				tarife.setVisible(false);
+				ilce.setVisible(false);
+				mahalle.setVisible(false);
+				kurulu_guc.setVisible(false);
+				og_dur.setVisible(false);
+				abone_no.setVisible(false);
+				lbl_KarneNo.setVisible(false);
+				lbl_SiraNo.setVisible(false);
+				lbl_il.setVisible(false);
+				lbl_ilce.setVisible(false);
+				lbl_mahalle.setVisible(false);
+				lbl_tarife.setVisible(false);
+				lbl_kuruluguc.setVisible(false);
+				lbl_ogdur.setVisible(false);
+				lbl_aboneno.setVisible(false);
+				kaydet.setVisible(false);
+				uyari.setVisible(false);
 				islem_ekran.setVisible(true);
 				panel.setVisible(false);
 			}
@@ -428,7 +429,44 @@ public class TesisatDuzenle extends JFrame {
 		
 		
 	}
+	
+	public void ilceleriListele(String il_adi, JComboBox ilce, JComboBox mahalle, Connection conn) {
+		try {
+			Statement s = conn.createStatement();
+			ResultSet r ;
+			Locale trlocale = new Locale("tr","TR");
+			il_adi=il_adi.toLowerCase(trlocale);
+			String query="select ilce from "+ il_adi + " order by ilce";
+			r=s.executeQuery(query);
+			while(r.next()) {
+				ilce.addItem(r.getString(1));
+			}
+			ilce.setMaximumRowCount(10);
+			mahalle.setEnabled(true);
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+	}
+	
+	public void mahalleleriListele(String ilce_adi, JComboBox mahalle , Connection conn) {
 
+		try {
+			Statement s = conn.createStatement();
+			ResultSet r ;
+			Locale trlocale = new Locale("tr","TR");
+			ilce_adi=ilce_adi.toLowerCase(trlocale);
+			String query="select mahalle from "+ ilce_adi + " order by mahalle";
+			r= s.executeQuery(query);
+			while(r.next()) {
+				mahalle.addItem(r.getString(1));
+			}
+			mahalle.setMaximumRowCount(15);
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+	}
 
 	public JPanel getContentPane() {
 		return contentPane;

@@ -28,7 +28,7 @@ public class AnaMenu extends JFrame {
 	private TesisatIslem tesisat_islemleri;
 	private TesisatKayit tesisat_kayit;
 	private TesisatDuzenle tesisat_duzenle;
-	//private TesisatSil tesisat_sil;
+	private TesisatSil tesisat_sil;
 
 	/**
 	 * Create the frame.
@@ -84,6 +84,10 @@ public class AnaMenu extends JFrame {
 		tesisat_duzenle.setVisible(false);
 		tesisat_duzenle.setLayout(null);
 		
+		tesisat_sil = tesisat_islemleri.getTesisat_sil();
+		contentPane.add(tesisat_sil.getPanel());
+		tesisat_sil.setVisible(false);
+		tesisat_sil.setLayout(null);
 		
 		baslik = new JTextField();
 		baslik.setEditable(false);

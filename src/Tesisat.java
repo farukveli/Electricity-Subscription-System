@@ -82,6 +82,32 @@ public class Tesisat {
 		return durum;
 	}
 	
+	public int Tesisat_Sil(Connection conn, int tesisat_no) {
+		int durum;
+		Tesisat tesisat = new Tesisat().Tesisat_Arama(conn, tesisat_no);
+		if(tesisat!=null) {
+			String query=("DELETE FROM tesisat WHERE tesisat_no=?");
+			PreparedStatement statement;
+			try {
+				statement = conn.prepareStatement(query);
+				statement.setInt(1, tesisat_no);
+				statement.execute();
+				System.out.println("Tesisat Silindi");
+			} 
+			catch(PSQLException e) {
+				System.out.println("Tesisat Bulunamadý!!!");
+			}
+			catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			durum=0;
+		}else {
+			durum=-1;
+		}
+		return durum;
+	}
+	
 	public Tesisat Tesisat_Arama(Connection conn,int tesisat_no) {
 		Tesisat k= new Tesisat();
 		k.tesisat_no=tesisat_no;
