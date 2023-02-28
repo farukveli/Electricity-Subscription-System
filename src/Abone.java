@@ -75,6 +75,7 @@ public class Abone {
 			durum=-2;
 			e.printStackTrace();
 		} 
+		
 		return durum;
 	}
 	
