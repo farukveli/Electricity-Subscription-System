@@ -29,6 +29,10 @@ public class AnaMenu extends JFrame {
 	private TesisatKayit tesisat_kayit;
 	private TesisatDuzenle tesisat_duzenle;
 	private TesisatSil tesisat_sil;
+	private AboneIslem abone_islemleri;
+	private AboneKayit abone_kayit;
+	private AboneDuzenle abone_duzenle;
+	private AboneSil abone_sil;
 
 	/**
 	 * Create the frame.
@@ -37,9 +41,11 @@ public class AnaMenu extends JFrame {
 		this.conn=conn;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 400, 570);
+		getContentPane().setLayout(null);
 		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setBounds(100, 100, 384, 531);
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
@@ -88,7 +94,27 @@ public class AnaMenu extends JFrame {
 		contentPane.add(tesisat_sil.getPanel());
 		tesisat_sil.setVisible(false);
 		tesisat_sil.getContentPane().setLayout(null);
+	
+		abone_islemleri = new AboneIslem(conn,panel);
+		contentPane.add(abone_islemleri.getPanel());
+		abone_islemleri.getPanel().setLayout(null);
+		abone_islemleri.getPanel().setVisible(false);
 		
+		abone_kayit = abone_islemleri.getAbone_kayit();
+		contentPane.add(abone_kayit.getPanel());
+		abone_kayit.setVisible(false);
+		abone_kayit.getContentPane().setLayout(null);
+		
+		abone_duzenle = abone_islemleri.getAbone_duzenle();
+		contentPane.add(abone_duzenle.getPanel());
+		abone_duzenle.setVisible(false);
+		abone_duzenle.getContentPane().setLayout(null);
+		
+		abone_sil = abone_islemleri.getAbone_sil();
+		contentPane.add(abone_sil.getPanel());
+		abone_sil.setVisible(false);
+		abone_sil.getContentPane().setLayout(null);
+/*	*/		
 		baslik = new JTextField();
 		baslik.setEditable(false);
 		baslik.setFont(new Font("Ubuntu", Font.BOLD, 22));
@@ -124,6 +150,8 @@ public class AnaMenu extends JFrame {
 		JButton aboneIslemleri = new JButton("Abone \u0130\u015Flemleri");
 		aboneIslemleri.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				abone_islemleri.getPanel().setVisible(true);
+				panel.setVisible(false);
 			}
 		});
 		aboneIslemleri.setFont(new Font("Ubuntu", Font.PLAIN, 11));

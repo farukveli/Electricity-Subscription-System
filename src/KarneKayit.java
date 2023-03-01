@@ -36,12 +36,14 @@ public class KarneKayit extends JFrame {
 		this.conn=conn;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 400, 570);
+		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setBounds(100, 100, 384, 531);
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		getContentPane().setLayout(null);
 		
-		panel=new JPanel();
+		panel = new JPanel();
 		panel.setBounds(0, 0, 384, 531);
 		contentPane.add(panel);
 		panel.setLayout(null);

@@ -40,16 +40,17 @@ public class TesisatKayit extends JFrame {
 	public TesisatKayit(Connection conn,JPanel islem_ekran) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 400, 570);
+		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setBounds(100, 100, 384, 531);
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		panel = new JPanel();
 		panel.setBounds(0, 0, 384, 531);
-		contentPane.add(panel);
+		getContentPane().add(panel);
 		panel.setLayout(null);
-		
 		JLabel lbl_TesisatNo = new JLabel("Tesisat No");
 		lbl_TesisatNo.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_TesisatNo.setBounds(10, 11, 103, 25);
@@ -103,7 +104,7 @@ public class TesisatKayit extends JFrame {
 		JLabel uyari = new JLabel("");
 		uyari.setHorizontalAlignment(SwingConstants.CENTER);
 		uyari.setFont(new Font("Ubuntu", Font.BOLD, 14));
-		uyari.setBounds(20, 466, 297, 23);
+		uyari.setBounds(20, 466, 354, 23);
 		panel.add(uyari);
 		
 		tesisat_no = new JTextField();

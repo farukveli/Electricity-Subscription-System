@@ -17,24 +17,6 @@ import javax.swing.border.EmptyBorder;
 public class TesisatSil extends JFrame {
 
 	private JPanel contentPane;
-	public JPanel getContentPane() {
-		return contentPane;
-	}
-	public void setContentPane(JPanel contentPane) {
-		this.contentPane = contentPane;
-	}
-	public JPanel getPanel() {
-		return panel;
-	}
-	public void setPanel(JPanel panel) {
-		this.panel = panel;
-	}
-	public JTextField getTesisat_sil_txt() {
-		return tesisat_sil_txt;
-	}
-	public void setTesisat_sil_txt(JTextField tesisat_sil_txt) {
-		this.tesisat_sil_txt = tesisat_sil_txt;
-	}
 	private JPanel panel;
 	private JTextField tesisat_sil_txt;
 	/**
@@ -42,15 +24,17 @@ public class TesisatSil extends JFrame {
 	 */
 	public TesisatSil(Connection conn, JPanel tesisat_islem) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 400, 570);
+		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
+		contentPane.setBounds(100, 100, 384, 531);
 		setContentPane(contentPane);
+		contentPane.setLayout(null);
 		
 		panel = new JPanel();
 		panel.setBounds(0, 0, 384, 531);
-		contentPane.add(panel);
+		getContentPane().add(panel);
 		panel.setLayout(null);
 		
 		JLabel uyari = new JLabel("");
@@ -101,5 +85,24 @@ public class TesisatSil extends JFrame {
 		geri_don.setBounds(248, 198, 102, 32);
 		panel.add(geri_don);
 	}
-
+	
+	public JPanel getContentPane() {
+		return contentPane;
+	}
+	public void setContentPane(JPanel contentPane) {
+		this.contentPane = contentPane;
+	}
+	public JPanel getPanel() {
+		return panel;
+	}
+	public void setPanel(JPanel panel) {
+		this.panel = panel;
+	}
+	public JTextField getTesisat_sil_txt() {
+		return tesisat_sil_txt;
+	}
+	public void setTesisat_sil_txt(JTextField tesisat_sil_txt) {
+		this.tesisat_sil_txt = tesisat_sil_txt;
+	}
+		
 }
