@@ -1,7 +1,10 @@
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.sql.Connection;
-
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -106,19 +109,6 @@ public class AboneKayit extends JFrame {
 		lbl_kayitTarihi.setBounds(10, 418, 103, 25);
 		panel.add(lbl_kayitTarihi);
 		
-		JButton kaydet = new JButton("Kaydet");
-		kaydet.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-			}
-		});
-		kaydet.setBounds(186, 497, 89, 23);
-		panel.add(kaydet);
-		
-		JButton geri_don = new JButton("Geri D\u00F6n");
-		geri_don.setBounds(285, 497, 89, 23);
-		panel.add(geri_don);
-		
 		tesisat_no = new JTextField();
 		tesisat_no.setColumns(10);
 		tesisat_no.setBounds(158, 24, 160, 25);
@@ -168,14 +158,17 @@ public class AboneKayit extends JFrame {
 		panel.add(puant);
 		
 		JDateChooser tahliye_tarihi = new JDateChooser();
+		tahliye_tarihi.setDateFormatString("yyyy-MM-dd");
 		tahliye_tarihi.setBounds(158, 274, 160, 25);
 		panel.add(tahliye_tarihi);
 		
 		JDateChooser sozlesme_tarihi = new JDateChooser();
+		sozlesme_tarihi.setDateFormatString("yyyy-MM-dd");
 		sozlesme_tarihi.setBounds(158, 238, 160, 25);
 		panel.add(sozlesme_tarihi);
 		
 		JDateChooser kayit_tarihi = new JDateChooser();
+		kayit_tarihi.setDateFormatString("yyyy-MM-dd");
 		kayit_tarihi.setBounds(158, 418, 160, 25);
 		panel.add(kayit_tarihi);
 		
@@ -185,6 +178,30 @@ public class AboneKayit extends JFrame {
 		uyari.setBounds(10, 454, 364, 23);
 		panel.add(uyari);
 		
+		JButton kaydet = new JButton("Kaydet");
+		kaydet.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+				System.out.println(df.format(sozlesme_tarihi.getDate()));
+				try {
+					int durum= new Abone().Abone_Ekle_Duzenle(c, Integer.parseInt(sozlesme_no.getText()), Integer.parseInt(tesisat_no.getText()),
+							unvan.getText(),sahis.getSelectedIndex(), Integer.parseInt(telefon.getText()), ePosta.getText(),
+							df.format(sozlesme_tarihi.getDate()),df.format(tahliye_tarihi.getDate()), tarife.getSelectedIndex(),
+							puant.getSelectedIndex(), Integer.parseInt(sozlesme_gucu.getText()),
+							df.format(kayit_tarihi.getDate()), 0);
+				} catch (Exception e1 ) {
+					uyari.setText("Lütfen Bütün Alanlarý Doldurunuz!!!");
+					uyari.setForeground(Color.RED);
+				}
+				
+			}
+		});
+		kaydet.setBounds(186, 497, 89, 23);
+		panel.add(kaydet);
+		
+		JButton geri_don = new JButton("Geri D\u00F6n");
+		geri_don.setBounds(285, 497, 89, 23);
+		panel.add(geri_don);
 		
 	}
 	public Connection getConn() {

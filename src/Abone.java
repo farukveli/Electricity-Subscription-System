@@ -1,5 +1,5 @@
 import java.sql.*;
-
+import java.lang.NullPointerException;
 import org.postgresql.util.PSQLException;
 
 
@@ -17,6 +17,10 @@ public class Abone {
 	private int puant;
 	private int sozlesme_gucu;
 	private Date kayit_tarihi;
+	
+	public Abone() {
+		
+	}
 	
 	public Abone(int id, int sozlesme_no, int tesisat_no, String unvan, int sahis_durum, int telefon_no, String e_posta,
 			Date sozlesme_tarihi, Date tahliye_tarihi, int tarife_kodu, int puant, int sozlesme_gucu,
@@ -38,43 +42,48 @@ public class Abone {
 	}
 	
 	public int Abone_Ekle_Duzenle(Connection conn, int sozlesme_no, int tesisat_no, String unvan, int sahis_durum, int telefon_no, String e_posta,
-			Date sozlesme_tarihi, Date tahliye_tarihi, int tarife_kodu, int puant, int sozlesme_gucu,
-			Date kayit_tarihi, int secenek) {
+			String sozlesme_tarihi, String tahliye_tarihi, int tarife_kodu, int puant, int sozlesme_gucu,
+			String kayit_tarihi, int secenek) {
 		int durum;
+
 		try {
 			String query;
 			if(secenek==0) {
-				query ="INSERT INTO abone VALUES (nextval('karne_id'),?,?,?,?,?,?,?,?,?,?,?,?,?)";
+				query ="INSERT INTO abone VALUES (nextval('karne_id'),?,?,?,?,?,?,?,?,?,?,?,?)";
 			}else{
-				query= "UPDATE abone SET sozlesme_no=?,tesisat_no=?,unvan=?,sahis_durum=?,telefon_no=?,"
+				query= "UPDATE abone SET tesisat_no=?,sozlesme_no=?,unvan=?,sahis_durum=?,telefon_no=?,"
 						+ "e_posta=?,sozlesme_tarihi=?,tahliye_tarihi=?,tarife_kodu=?,puant=?,"
 						+ "sozlesme_gucu=?,kayit_tarihi=? where karne_no="+sozlesme_no;
 			}
 			PreparedStatement statement = conn.prepareStatement(query);
-			statement.setInt(1, sozlesme_no);
-			statement.setInt(2, tesisat_no);
+			Date tarih_sozlesme = Date.valueOf(sozlesme_tarihi);
+			Date tarih_tahliye = Date.valueOf(tahliye_tarihi);
+			Date tarih_kayit = Date.valueOf(kayit_tarihi);
+			statement.setInt(1, tesisat_no);
+			statement.setInt(2, sozlesme_no);
 			statement.setString(3, unvan);
 			statement.setInt(4, sahis_durum);
 			statement.setInt(5, telefon_no);
 			statement.setString(6, e_posta);
-			statement.setDate(7, sozlesme_tarihi);
-			statement.setDate(8, tahliye_tarihi);
+			statement.setDate(7,tarih_sozlesme);
+			statement.setDate(8, tarih_tahliye);
 			statement.setInt(9, tarife_kodu);
 			statement.setInt(10, puant);
 			statement.setInt(11, sozlesme_gucu);
-			statement.setDate(11, kayit_tarihi);
+			statement.setDate(12, tarih_kayit);
 			statement.execute();
 			System.out.println("yazdi");
 			durum=0;
 		}
 		catch(PSQLException e) {
-			System.out.println("Ayný id'li tesisats olamaz");
 			durum=-1;
 		}
 		catch (SQLException e) {
 			durum=-2;
-			e.printStackTrace();
-		} 
+		}
+		catch (java.lang.NullPointerException e) {
+			durum=-3;
+		}
 		
 		return durum;
 	}
