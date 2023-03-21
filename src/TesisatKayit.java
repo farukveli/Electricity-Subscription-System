@@ -48,55 +48,66 @@ public class TesisatKayit extends JFrame {
 		contentPane.setLayout(null);
 		
 		panel = new JPanel();
+		panel.setBackground(new Color(176, 196, 222));
 		panel.setBounds(0, 0, 384, 531);
 		getContentPane().add(panel);
 		panel.setLayout(null);
 		JLabel lbl_TesisatNo = new JLabel("Tesisat No");
+		lbl_TesisatNo.setForeground(new Color(0, 139, 139));
 		lbl_TesisatNo.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_TesisatNo.setBounds(10, 11, 103, 25);
 		panel.add(lbl_TesisatNo);
 		
 		lbl_KarneNo = new JLabel("Karne No");
+		lbl_KarneNo.setForeground(new Color(0, 139, 139));
 		lbl_KarneNo.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_KarneNo.setBounds(10, 57, 103, 25);
 		panel.add(lbl_KarneNo);
 
 		JLabel lbl_il = new JLabel("\u0130l");
+		lbl_il.setForeground(new Color(0, 139, 139));
 		lbl_il.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_il.setBounds(10, 149, 103, 25);
 		panel.add(lbl_il);
 		
 		lbl_SiraNo = new JLabel("S\u0131ra No");
+		lbl_SiraNo.setForeground(new Color(0, 139, 139));
 		lbl_SiraNo.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_SiraNo.setBounds(10, 103, 103, 25);
 		panel.add(lbl_SiraNo);
 
 		JLabel lbl_ilce = new JLabel("\u0130l\u00E7e");
+		lbl_ilce.setForeground(new Color(0, 139, 139));
 		lbl_ilce.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_ilce.setBounds(10, 195, 103, 25);
 		panel.add(lbl_ilce);
 
 		JLabel lbl_tarife = new JLabel("Tarife");
+		lbl_tarife.setForeground(new Color(0, 139, 139));
 		lbl_tarife.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_tarife.setBounds(10, 287, 103, 25);
 		panel.add(lbl_tarife);
 
 		JLabel lbl_kuruluguc = new JLabel("Kurulu G\u00FC\u00E7");
+		lbl_kuruluguc.setForeground(new Color(0, 139, 139));
 		lbl_kuruluguc.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_kuruluguc.setBounds(10, 333, 103, 25);
 		panel.add(lbl_kuruluguc);
 
 		JLabel lbl_ogdur = new JLabel("OG_dur");
+		lbl_ogdur.setForeground(new Color(0, 139, 139));
 		lbl_ogdur.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_ogdur.setBounds(10, 379, 103, 25);
 		panel.add(lbl_ogdur);
 
 		JLabel lbl_aboneno = new JLabel("Abone Numaras\u0131");
+		lbl_aboneno.setForeground(new Color(0, 139, 139));
 		lbl_aboneno.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_aboneno.setBounds(10, 430, 103, 25);
 		panel.add(lbl_aboneno);
 
 		JLabel lbl_mahalle = new JLabel("Mahalle");
+		lbl_mahalle.setForeground(new Color(0, 139, 139));
 		lbl_mahalle.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_mahalle.setBounds(10, 246, 103, 25);
 		panel.add(lbl_mahalle);
@@ -108,6 +119,8 @@ public class TesisatKayit extends JFrame {
 		panel.add(uyari);
 		
 		tesisat_no = new JTextField();
+		tesisat_no.setForeground(new Color(176, 224, 230));
+		tesisat_no.setBackground(new Color(0, 139, 139));
 		tesisat_no.setColumns(10);
 		tesisat_no.setBounds(157, 6, 160, 35);
 		tesisat_no.addMouseListener(new MouseAdapter() {
@@ -119,6 +132,8 @@ public class TesisatKayit extends JFrame {
 		panel.add(tesisat_no);
 		
 		karne_no = new JTextField();
+		karne_no.setForeground(new Color(176, 224, 230));
+		karne_no.setBackground(new Color(0, 139, 139));
 		karne_no.setColumns(10);
 		karne_no.setBounds(157, 52, 160, 35);
 		karne_no.addMouseListener(new MouseAdapter() {
@@ -130,6 +145,8 @@ public class TesisatKayit extends JFrame {
 		panel.add(karne_no);
 		
 		sira_no = new JTextField();
+		sira_no.setForeground(new Color(176, 224, 230));
+		sira_no.setBackground(new Color(0, 139, 139));
 		sira_no.setColumns(10);
 		sira_no.setBounds(157, 98, 160, 35);
 		sira_no.addMouseListener(new MouseAdapter() {
@@ -141,8 +158,14 @@ public class TesisatKayit extends JFrame {
 		panel.add(sira_no);
 	
 		JComboBox il = new JComboBox();
+		il.setForeground(new Color(176, 224, 230));
+		il.setBackground(new Color(0, 139, 139));
 		JComboBox ilce = new JComboBox();
+		ilce.setForeground(new Color(176, 224, 230));
+		ilce.setBackground(new Color(0, 139, 139));
 		JComboBox mahalle = new JComboBox();
+		mahalle.setForeground(new Color(176, 224, 230));
+		mahalle.setBackground(new Color(0, 139, 139));
 		il.setBounds(157, 144, 160, 35);
 		String il_sorgu="Select isim from iller";
 		il.addItem("Seçiniz...");
@@ -174,8 +197,7 @@ public class TesisatKayit extends JFrame {
 		});
 		
 		panel.add(il);
-		
-		
+
 		ilce.setEnabled(false);
 		ilce.addItem("Seçiniz...");
 		ilce.addMouseListener(new MouseAdapter() {
@@ -193,9 +215,7 @@ public class TesisatKayit extends JFrame {
 				try {
 					Statement s = conn.createStatement();
 					ResultSet r ;
-					Locale trlocale = new Locale("tr","TR");
-					il_adi=il_adi.toLowerCase(trlocale);
-					String query="select ilce from "+ il_adi + " order by ilce";
+					String query="select distinct ilce from mahalleler where il = '"+ il_adi + "' order by ilce";
 					r=s.executeQuery(query);
 					while(r.next()) {
 						ilce.addItem(r.getString(1));
@@ -222,9 +242,7 @@ public class TesisatKayit extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				String ilce_adi= ilce.getSelectedItem().toString();
-				Locale trlocale = new Locale("tr","TR");
-				ilce_adi=ilce_adi.toLowerCase(trlocale);
-				String query="select mahalle from "+ ilce_adi + " order by mahalle";
+				String query="select mahalle from mahalleler where ilce = '"+ ilce_adi + "' order by mahalle";
 				uyari.setVisible(false);
 				mahalle.removeAllItems();
 				mahalle.addItem("Seçiniz...");
@@ -246,6 +264,8 @@ public class TesisatKayit extends JFrame {
 		panel.add(mahalle);
 		
 		JComboBox tarife = new JComboBox();
+		tarife.setForeground(new Color(176, 224, 230));
+		tarife.setBackground(new Color(0, 139, 139));
 		tarife.setModel(new DefaultComboBoxModel(new String[] {"Se\u00E7iniz...", "Mesken", "Ticari", "Sanayi", "Ayd\u0131nlatma", "Tar\u0131msal Sulama"}));
 		tarife.setSelectedIndex(0);
 		tarife.setBounds(157, 282, 160, 35);
@@ -258,6 +278,8 @@ public class TesisatKayit extends JFrame {
 		panel.add(tarife);
 		
 		kurulu_guc = new JTextField();
+		kurulu_guc.setForeground(new Color(176, 224, 230));
+		kurulu_guc.setBackground(new Color(0, 139, 139));
 		kurulu_guc.setColumns(10);
 		kurulu_guc.setBounds(157, 328, 160, 35);
 		kurulu_guc.addMouseListener(new MouseAdapter() {
@@ -269,6 +291,8 @@ public class TesisatKayit extends JFrame {
 		panel.add(kurulu_guc);
 		
 		og_dur = new JTextField();
+		og_dur.setForeground(new Color(176, 224, 230));
+		og_dur.setBackground(new Color(0, 139, 139));
 		og_dur.setColumns(10);
 		og_dur.setBounds(157, 374, 160, 35);
 		og_dur.addMouseListener(new MouseAdapter() {
@@ -280,6 +304,8 @@ public class TesisatKayit extends JFrame {
 		panel.add(og_dur);
 		
 		abone_no = new JTextField();
+		abone_no.setForeground(new Color(176, 224, 230));
+		abone_no.setBackground(new Color(0, 139, 139));
 		abone_no.setColumns(10);
 		abone_no.setBounds(157, 420, 160, 35);
 		abone_no.addMouseListener(new MouseAdapter() {
@@ -291,6 +317,8 @@ public class TesisatKayit extends JFrame {
 		panel.add(abone_no);
 		
 		JButton kaydet = new JButton("Kaydet");
+		kaydet.setBackground(new Color(0, 128, 0));
+		kaydet.setForeground(new Color(176, 224, 230));
 		kaydet.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(il.getSelectedIndex()==0) {
@@ -345,6 +373,8 @@ public class TesisatKayit extends JFrame {
 		panel.add(kaydet);
 		
 		JButton geri_don = new JButton("Geri D\u00F6n");
+		geri_don.setBackground(new Color(255, 99, 71));
+		geri_don.setForeground(new Color(176, 224, 230));
 		geri_don.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				islem_ekran.setVisible(true);

@@ -37,11 +37,14 @@ public class KarneSil extends JFrame {
 		contentPane.setLayout(null);
 		
 		panel = new JPanel();
+		panel.setBackground(new Color(176, 196, 222));
+		panel.setForeground(new Color(176, 196, 222));
 		panel.setBounds(0, 0, 384, 531);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Silmek \u0130stedi\u011Finiz Karne No'yu Giriniz:");
+		lblNewLabel.setForeground(new Color(0, 139, 139));
 		lblNewLabel.setBounds(10, 111, 220, 40);
 		panel.add(lblNewLabel);
 		
@@ -53,6 +56,8 @@ public class KarneSil extends JFrame {
 		panel.add(uyari);
 		
 		karne_sil_txt = new JTextField();
+		karne_sil_txt.setForeground(new Color(176, 224, 230));
+		karne_sil_txt.setBackground(new Color(0, 139, 139));
 		karne_sil_txt.setHorizontalAlignment(SwingConstants.CENTER);
 		karne_sil_txt.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		karne_sil_txt.setBounds(248, 114, 102, 32);
@@ -66,6 +71,8 @@ public class KarneSil extends JFrame {
 		karne_sil_txt.setColumns(10);
 		
 		JButton sil = new JButton("Sil");
+		sil.setForeground(new Color(176, 224, 230));
+		sil.setBackground(new Color(0, 128, 0));
 		sil.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(karne_sil_txt.getText().isEmpty()) {
@@ -90,6 +97,8 @@ public class KarneSil extends JFrame {
 		panel.add(sil);
 		
 		JButton geri_don = new JButton("Geri Dön");
+		geri_don.setBackground(new Color(255, 99, 71));
+		geri_don.setForeground(new Color(176, 224, 230));
 		geri_don.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				uyari.setVisible(false);

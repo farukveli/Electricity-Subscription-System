@@ -44,6 +44,7 @@ public class KarneKayit extends JFrame {
 		getContentPane().setLayout(null);
 		
 		panel = new JPanel();
+		panel.setBackground(new Color(176, 196, 222));
 		panel.setBounds(0, 0, 384, 531);
 		contentPane.add(panel);
 		panel.setLayout(null);
@@ -55,27 +56,39 @@ public class KarneKayit extends JFrame {
 		panel.add(kayit_uyari);
 		
 		JLabel lblNewLabel = new JLabel("Karne No");
+		lblNewLabel.setForeground(new Color(0, 139, 139));
+		lblNewLabel.setBackground(new Color(176, 224, 230));
 		lblNewLabel.setBounds(10, 34, 75, 25);
 		panel.add(lblNewLabel);
 		
 		JLabel lblAdres = new JLabel("Adres");
+		lblAdres.setForeground(new Color(0, 139, 139));
+		lblAdres.setBackground(new Color(176, 224, 230));
 		lblAdres.setBounds(10, 87, 75, 25);
 		panel.add(lblAdres);
 		
 		JLabel lblKyDurumu = new JLabel("K\u00F6y Durumu");
+		lblKyDurumu.setForeground(new Color(0, 139, 139));
+		lblKyDurumu.setBackground(new Color(176, 224, 230));
 		lblKyDurumu.setBounds(10, 137, 75, 25);
 		panel.add(lblKyDurumu);
 		
 		JLabel lblSayfiyeDurumu = new JLabel("Sayfiye Durumu");
+		lblSayfiyeDurumu.setForeground(new Color(0, 139, 139));
+		lblSayfiyeDurumu.setBackground(new Color(176, 224, 230));
 		lblSayfiyeDurumu.setBounds(10, 183, 93, 25);
 		panel.add(lblSayfiyeDurumu);
 		
 		JLabel lblOkumaGn = new JLabel("Okuma G\u00FCn\u00FC");
+		lblOkumaGn.setForeground(new Color(0, 139, 139));
+		lblOkumaGn.setBackground(new Color(176, 224, 230));
 		lblOkumaGn.setBounds(10, 235, 75, 25);
 		panel.add(lblOkumaGn);
 		
 		
 		karne_no = new JTextField();
+		karne_no.setBackground(new Color(0, 139, 139));
+		karne_no.setForeground(new Color(176, 224, 230));
 		karne_no.setBounds(140, 29, 160, 35);
 		karne_no.setColumns(10);
 		karne_no.addMouseListener(new MouseAdapter() {
@@ -87,6 +100,8 @@ public class KarneKayit extends JFrame {
 		panel.add(karne_no);
 		
 		adres = new JTextField();
+		adres.setForeground(new Color(176, 224, 230));
+		adres.setBackground(new Color(0, 139, 139));
 		adres.setColumns(10);
 		adres.setBounds(140, 81, 160, 35);
 		adres.addMouseListener(new MouseAdapter() {
@@ -98,7 +113,8 @@ public class KarneKayit extends JFrame {
 		panel.add(adres);
 		
 		JComboBox koy = new JComboBox();
-		koy.setBackground(Color.WHITE);
+		koy.setForeground(new Color(176, 224, 230));
+		koy.setBackground(new Color(0, 139, 139));
 		koy.setModel(new DefaultComboBoxModel(new String[] {"Se\u00E7iniz...", "K\u00F6y De\u011Fil", "K\u00F6y"}));
 		koy.setSelectedIndex(0);
 		koy.setBounds(140, 127, 160, 35);
@@ -112,7 +128,8 @@ public class KarneKayit extends JFrame {
 		
 		
 		sayfiye = new JComboBox();
-		sayfiye.setBackground(Color.WHITE);
+		sayfiye.setForeground(new Color(176, 224, 230));
+		sayfiye.setBackground(new Color(0, 139, 139));
 		sayfiye.setModel(new DefaultComboBoxModel(new String[] {"Se\u00E7iniz...", "Sayfiye De\u011Fil", "Sayfiye"}));
 		sayfiye.setSelectedIndex(0);
 		sayfiye.setBounds(140, 178, 160, 35);
@@ -127,9 +144,10 @@ public class KarneKayit extends JFrame {
 
 		
 		JComboBox okuma_gunu = new JComboBox();
+		okuma_gunu.setForeground(new Color(176, 224, 230));
 		okuma_gunu.setModel(new DefaultComboBoxModel(new String[] {"Se\u00E7iniz...", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30"}));
 		okuma_gunu.setSelectedIndex(0);
-		okuma_gunu.setBackground(Color.WHITE);
+		okuma_gunu.setBackground(new Color(0, 139, 139));
 		okuma_gunu.setBounds(140, 230, 160, 35);
 		okuma_gunu.addMouseListener(new MouseAdapter() {
 			@Override
@@ -140,6 +158,8 @@ public class KarneKayit extends JFrame {
 		panel.add(okuma_gunu);
 
 		JButton kaydet = new JButton("Kaydet");
+		kaydet.setForeground(new Color(176, 224, 230));
+		kaydet.setBackground(new Color(0, 128, 0));
 		kaydet.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int durum= new Karneler().Karne_Ekle_Duzenle(conn,Integer.parseInt(karne_no.getText()),adres.getText(), okuma_gunu.getSelectedIndex()+1,
@@ -168,6 +188,8 @@ public class KarneKayit extends JFrame {
 		panel.add(kaydet);
 		
 		JButton geri_don = new JButton("Geri D\u00F6n");
+		geri_don.setForeground(new Color(176, 224, 230));
+		geri_don.setBackground(new Color(255, 99, 71));
 		geri_don.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				karne_islem.setVisible(true);

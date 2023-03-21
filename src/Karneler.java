@@ -65,7 +65,7 @@ public class Karneler {
 				System.out.println("Karne Silindi");
 			} 
 			catch(PSQLException e) {
-				System.out.println("Karne Bulunamadý!!!");
+				System.out.println("Karne Silinemedi!!!");
 			}
 			catch (SQLException e) {
 				// TODO Auto-generated catch block

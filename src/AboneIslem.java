@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import java.awt.Color;
 
 public class AboneIslem extends JFrame {
 
@@ -30,6 +31,7 @@ public class AboneIslem extends JFrame {
 		getContentPane().setLayout(null);
 		
 		panel = new JPanel();
+		panel.setBackground(new Color(176, 196, 222));
 		panel.setBounds(0, 0, 384, 531);
 		contentPane.add(panel);
 		panel.setLayout(null);
@@ -50,6 +52,8 @@ public class AboneIslem extends JFrame {
 		abone_sil.getPanel().setVisible(false);
 
 		JButton aboneKayit = new JButton("Yeni Abone Kay\u0131t");
+		aboneKayit.setBackground(new Color(0, 139, 139));
+		aboneKayit.setForeground(new Color(176, 224, 230));
 		aboneKayit.setBounds(117, 105, 141, 46);
 		aboneKayit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -58,6 +62,42 @@ public class AboneIslem extends JFrame {
 			}
 		});
 		panel.add(aboneKayit);
+		
+		JButton aboneDuzenle = new JButton("Abone D\u00FCzenle");
+		aboneDuzenle.setBackground(new Color(0, 139, 139));
+		aboneDuzenle.setForeground(new Color(176, 224, 230));
+		aboneDuzenle.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				abone_duzenle.getPanel().setVisible(true);
+				panel.setVisible(false);
+			}
+		});
+		aboneDuzenle.setBounds(117, 162, 141, 46);
+		panel.add(aboneDuzenle);
+		
+		JButton sil = new JButton("Abone Sil");
+		sil.setBackground(new Color(0, 139, 139));
+		sil.setForeground(new Color(176, 224, 230));
+		sil.setBounds(117, 219, 141, 46);
+		sil.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				abone_sil.getPanel().setVisible(true);
+				panel.setVisible(false);
+			}
+		});
+		panel.add(sil);
+		
+		JButton geri_don = new JButton("Geri D\u00F6n");
+		geri_don.setBackground(new Color(255, 99, 71));
+		geri_don.setForeground(new Color(176, 224, 230));
+		geri_don.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ana_menu.setVisible(true);
+				panel.setVisible(false);
+			}
+		});
+		geri_don.setBounds(285, 497, 89, 23);
+		panel.add(geri_don);
 		
 	}
 	public JPanel getContentPane() {
@@ -90,5 +130,4 @@ public class AboneIslem extends JFrame {
 	public void setAbone_sil(AboneSil abone_sil) {
 		this.abone_sil = abone_sil;
 	}
-
 }

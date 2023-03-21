@@ -53,7 +53,7 @@ public class Abone {
 			}else{
 				query= "UPDATE abone SET tesisat_no=?,sozlesme_no=?,unvan=?,sahis_durum=?,telefon_no=?,"
 						+ "e_posta=?,sozlesme_tarihi=?,tahliye_tarihi=?,tarife_kodu=?,puant=?,"
-						+ "sozlesme_gucu=?,kayit_tarihi=? where karne_no="+sozlesme_no;
+						+ "sozlesme_gucu=?,kayit_tarihi=? where sozlesme_no="+sozlesme_no;
 			}
 			PreparedStatement statement = conn.prepareStatement(query);
 			Date tarih_sozlesme = Date.valueOf(sozlesme_tarihi);
@@ -72,7 +72,6 @@ public class Abone {
 			statement.setInt(11, sozlesme_gucu);
 			statement.setDate(12, tarih_kayit);
 			statement.execute();
-			System.out.println("yazdi");
 			durum=0;
 		}
 		catch(PSQLException e) {
@@ -85,6 +84,63 @@ public class Abone {
 			durum=-3;
 		}
 		
+		return durum;
+	}
+	
+	public Abone Abone_Ara(Connection conn, int sozlesme_no) {
+		Abone k= new Abone();
+		k.sozlesme_no=sozlesme_no;
+		String query="SELECT sozlesme_no, tesisat_no, unvan, sahis_durum, telefon_no,e_posta,"
+				+ "	sozlesme_tarihi, tahliye_tarihi, tarife_kodu, puant, sozlesme_gucu,"
+				+ "	kayit_tarihi FROM abone WHERE sozlesme_no="+sozlesme_no;
+		int durum=0;
+		try {
+			Statement s= conn.createStatement();
+			ResultSet r= s.executeQuery(query);
+			r.next();
+			k.sozlesme_no=r.getInt(1);
+			k.tesisat_no=r.getInt(2);
+			k.unvan=r.getString(3);
+			k.sahis_durum=r.getInt(4);
+			k.telefon_no=r.getInt(5);
+			k.e_posta=r.getString(6);
+			k.sozlesme_tarihi=r.getDate(7);
+			k.tahliye_tarihi=r.getDate(8);
+			k.tarife_kodu=r.getInt(9);
+			k.puant=r.getInt(10);
+			k.sozlesme_gucu=r.getInt(11);
+			k.kayit_tarihi=r.getDate(12);
+		} catch (SQLException e) {
+			k=null;
+		}
+		
+		return k;
+		
+	}
+	
+	public int Abone_Sil(Connection conn, int Abone_no) {
+		int durum;
+		Abone Abone = new Abone().Abone_Ara(conn, Abone_no);
+		if(Abone!=null) {
+			String query=("DELETE FROM Abone WHERE Abone_no=?");
+			PreparedStatement statement;
+			try {
+				statement = conn.prepareStatement(query);
+				statement.setInt(1, sozlesme_no);
+				statement.execute();
+				System.out.println("Abone Silindi");
+			} 
+			catch(PSQLException e) {
+				System.out.println("Abone Bulunamadý!!!");
+			}
+			catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			durum=0;
+		}else {
+			durum=-1;
+		}
 		return durum;
 	}
 	

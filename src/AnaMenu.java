@@ -2,6 +2,7 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Window.Type;
@@ -12,13 +13,14 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import java.awt.Font;
+import java.awt.Color;
 
 public class AnaMenu extends JFrame {
 
 	private JPanel contentPane;
 	private JPanel panel;
 	private Connection conn;
-	private JTextField baslik;
+	private JLabel baslik;
 	private JButton tesisatIslemleri;
 	private JButton karneIslemleri;
 	private KarneIslem karne_islemleri;
@@ -50,6 +52,7 @@ public class AnaMenu extends JFrame {
 		contentPane.setLayout(null);
 		
 		panel = new JPanel();
+		panel.setBackground(new Color(176, 196, 222));
 		panel.setBounds(0, 0, 384, 531);
 		contentPane.add(panel);
 		panel.setLayout(null);
@@ -115,16 +118,18 @@ public class AnaMenu extends JFrame {
 		abone_sil.setVisible(false);
 		abone_sil.getContentPane().setLayout(null);
 /*	*/		
-		baslik = new JTextField();
-		baslik.setEditable(false);
+		baslik = new JLabel();
+		baslik.setForeground(new Color(0, 139, 139));
+		baslik.setBackground(new Color(176, 196, 222));
 		baslik.setFont(new Font("Ubuntu", Font.BOLD, 22));
 		baslik.setHorizontalAlignment(SwingConstants.CENTER);
 		baslik.setText("ELEKTR\u0130K DA\u011EITIM S\u0130STEM\u0130");
 		baslik.setBounds(10, 11, 364, 66);
 		panel.add(baslik);
-		baslik.setColumns(10);
 		
 		karneIslemleri = new JButton("Karne \u0130\u015Flemleri");
+		karneIslemleri.setForeground(new Color(176, 224, 230));
+		karneIslemleri.setBackground(new Color(0, 139, 139));
 		karneIslemleri.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				karne_islemleri.getPanel().setVisible(true);
@@ -137,6 +142,8 @@ public class AnaMenu extends JFrame {
 		
 		
 		tesisatIslemleri = new JButton("Tesisat \u0130\u015Flemleri");
+		tesisatIslemleri.setForeground(new Color(176, 224, 230));
+		tesisatIslemleri.setBackground(new Color(0, 139, 139));
 		tesisatIslemleri.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				tesisat_islemleri.getPanel().setVisible(true);
@@ -148,6 +155,8 @@ public class AnaMenu extends JFrame {
 		panel.add(tesisatIslemleri);
 		
 		JButton aboneIslemleri = new JButton("Abone \u0130\u015Flemleri");
+		aboneIslemleri.setForeground(new Color(176, 224, 230));
+		aboneIslemleri.setBackground(new Color(0, 139, 139));
 		aboneIslemleri.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				abone_islemleri.getPanel().setVisible(true);

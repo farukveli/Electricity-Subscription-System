@@ -17,7 +17,7 @@ public class main {
             new Sayac().Sayac_Ekle(c, 0, "asd", 0, 0, 0, 0, "2015-12-01");
             new Sayac_Tesisat().Sayac_Tesisat_Ekle(c, 0, 0, 0, "2020-10-21");
         	*/
-         //       new Fonksiyonlar().il_tablosu_uret(c);
+            //     new Fonksiyonlar().il_tablosu_uret(c);
     //         new Fonksiyonlar().il_tablosu_doldur(c);
      //   new Fonksiyonlar().ilce_tablosu_uret(c);
        //     new Fonksiyonlar().ilce_tablosu_doldur(c);

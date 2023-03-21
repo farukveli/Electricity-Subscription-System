@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import java.awt.Font;
 import javax.swing.SwingConstants;
+import java.awt.Color;
 
 public class KarneIslem extends JFrame {
 
@@ -32,6 +33,7 @@ public class KarneIslem extends JFrame {
 		getContentPane().setLayout(null);
 		
 		panel = new JPanel();
+		panel.setBackground(new Color(176, 196, 222));
 		panel.setBounds(0, 0, 384, 531);
 		contentPane.add(panel);
 		panel.setLayout(null);
@@ -53,6 +55,8 @@ public class KarneIslem extends JFrame {
 		
 
 		JButton karneKayýt = new JButton("Yeni Karne Kay\u0131t");
+		karneKayýt.setForeground(new Color(176, 224, 230));
+		karneKayýt.setBackground(new Color(0, 139, 139));
 		karneKayýt.setBounds(117, 105, 141, 46);
 		karneKayýt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -63,6 +67,8 @@ public class KarneIslem extends JFrame {
 		panel.add(karneKayýt);
 		
 		JButton karneDuzenle = new JButton("Karne D\u00FCzenle");
+		karneDuzenle.setForeground(new Color(176, 224, 230));
+		karneDuzenle.setBackground(new Color(0, 139, 139));
 		karneDuzenle.setBounds(117, 162, 141, 46);
 		karneDuzenle.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -75,6 +81,8 @@ public class KarneIslem extends JFrame {
 		
 		
 		JButton karneSil = new JButton("Karne Sil");
+		karneSil.setForeground(new Color(176, 224, 230));
+		karneSil.setBackground(new Color(0, 139, 139));
 		karneSil.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				karne_sil.getPanel().setVisible(true);
@@ -85,6 +93,8 @@ public class KarneIslem extends JFrame {
 		panel.add(karneSil);
 		
 		JButton geri_don = new JButton("Geri D\u00F6n");
+		geri_don.setForeground(new Color(176, 224, 230));
+		geri_don.setBackground(new Color(255, 99, 71));
 		geri_don.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ana_menu.setVisible(true);

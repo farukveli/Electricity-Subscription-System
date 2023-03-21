@@ -8,6 +8,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
 
 public class TesisatIslem extends JFrame {
 
@@ -36,6 +37,7 @@ public class TesisatIslem extends JFrame {
 		contentPane.setLayout(null);
 		
 		panel = new JPanel();
+		panel.setBackground(new Color(176, 196, 222));
 		panel.setBounds(0, 0, 384, 531);
 		getContentPane().add(panel);
 		panel.setLayout(null);
@@ -56,6 +58,8 @@ public class TesisatIslem extends JFrame {
 		tesisat_sil.getPanel().setVisible(false);
 		
 		JButton tesisatKayýt = new JButton("Yeni Tesisat Kay\u0131t");
+		tesisatKayýt.setForeground(new Color(176, 224, 230));
+		tesisatKayýt.setBackground(new Color(0, 139, 139));
 		tesisatKayýt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				tesisat_kayit.getPanel().setVisible(true);
@@ -66,6 +70,8 @@ public class TesisatIslem extends JFrame {
 		panel.add(tesisatKayýt);
 		
 		JButton tesisatDuzenle = new JButton("Tesisat D\u00FCzenle");
+		tesisatDuzenle.setForeground(new Color(176, 224, 230));
+		tesisatDuzenle.setBackground(new Color(0, 139, 139));
 		tesisatDuzenle.setBounds(122, 106, 140, 46);
 		tesisatDuzenle.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -76,6 +82,8 @@ public class TesisatIslem extends JFrame {
 		panel.add(tesisatDuzenle);
 		
 		JButton tesisatSil = new JButton("Tesisat Sil");
+		tesisatSil.setForeground(new Color(176, 224, 230));
+		tesisatSil.setBackground(new Color(0, 139, 139));
 		tesisatSil.setBounds(122, 182, 140, 46);
 		tesisatSil.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -86,6 +94,8 @@ public class TesisatIslem extends JFrame {
 		panel.add(tesisatSil);	
 		
 		JButton geri_don = new JButton("Geri D\u00F6n");
+		geri_don.setForeground(new Color(176, 224, 230));
+		geri_don.setBackground(new Color(255, 99, 71));
 		geri_don.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ana_menu.setVisible(true);

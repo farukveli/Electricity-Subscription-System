@@ -33,6 +33,7 @@ public class TesisatSil extends JFrame {
 		contentPane.setLayout(null);
 		
 		panel = new JPanel();
+		panel.setBackground(new Color(176, 196, 222));
 		panel.setBounds(0, 0, 384, 531);
 		getContentPane().add(panel);
 		panel.setLayout(null);
@@ -45,10 +46,13 @@ public class TesisatSil extends JFrame {
 		panel.add(uyari);
 		
 		JLabel lblNewLabel = new JLabel("Silmek \u0130stedi\u011Finiz Tesisat No'yu Giriniz:");
+		lblNewLabel.setForeground(new Color(0, 139, 139));
 		lblNewLabel.setBounds(10, 111, 220, 40);
 		panel.add(lblNewLabel);
 		
 		tesisat_sil_txt = new JTextField();
+		tesisat_sil_txt.setForeground(new Color(176, 224, 230));
+		tesisat_sil_txt.setBackground(new Color(0, 139, 139));
 		tesisat_sil_txt.setHorizontalAlignment(SwingConstants.CENTER);
 		tesisat_sil_txt.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tesisat_sil_txt.setBounds(248, 114, 102, 32);
@@ -56,6 +60,8 @@ public class TesisatSil extends JFrame {
 		tesisat_sil_txt.setColumns(10);
 		
 		JButton sil = new JButton("Sil");
+		sil.setBackground(new Color(0, 128, 0));
+		sil.setForeground(new Color(176, 224, 230));
 		sil.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int durum =new Tesisat().Tesisat_Sil(conn, Integer.parseInt(tesisat_sil_txt.getText()));
@@ -74,6 +80,8 @@ public class TesisatSil extends JFrame {
 		panel.add(sil);
 		
 		JButton geri_don = new JButton("Geri Dön");
+		geri_don.setBackground(new Color(255, 99, 71));
+		geri_don.setForeground(new Color(176, 224, 230));
 		geri_don.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				uyari.setVisible(false);
